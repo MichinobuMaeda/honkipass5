@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script type="text/javascript" src="bundle/main.js"></script>
+    <script type="text/javascript">
+      function refresh() {
+        setTimeout(() => {
+          document.getElementById('password').value = honkipass.password;
+          document.getElementById('length').value = honkipass.length;
+          document.getElementById('lengthValue').innerText = honkipass.length;
+          document.getElementById('excludes').value = honkipass.excludes;
+          document.getElementById('charSetStd').selected = honkipass.charSet === 'std';
+          document.getElementById('charSetExt').selected = honkipass.charSet === 'ext';
+          document.getElementById('charSetAll').selected = honkipass.charSet === 'all';
+          document.getElementById('useUpperCase').disabled = honkipass.charSet !== 'all';
+          document.getElementById('useLowerCase').disabled = honkipass.charSet !== 'all';
+          document.getElementById('useNumbers').disabled = honkipass.charSet !== 'all';
+          document.getElementById('useSymbols').disabled = honkipass.charSet !== 'all';
+          document.getElementById('excludesEnabled').disabled = honkipass.charSet !== 'all';
+          document.getElementById('excludes').disabled = honkipass.charSet !== 'all' || !honkipass.excludesEnabled;
+          document.getElementById('useUpperCase').selected = honkipass.useUpperCase;
+          document.getElementById('useLowerCase').selected = honkipass.useLowerCase;
+          document.getElementById('useNumbers').selected = honkipass.useNumbers;
+          document.getElementById('useSymbols').selected = honkipass.useSymbols;
+          document.getElementById('useAllTypes').selected = honkipass.useAllTypes;
+          document.getElementById('repeatable').selected = !honkipass.repeatable;
+          document.getElementById('excludesEnabled').selected = honkipass.excludesEnabled;
+          document.getElementById('generationError').style.display = honkipass.generationError ? 'block' : 'none';
+          document.getElementById('repeatableError').style.display = honkipass.repeatableError ? 'block' : 'none';
+          document.getElementById('chars').innerHTML = honkipass.usedChars()
+            .map((item) => `<span class="stt-${item.stt}">${item.c}</span>`).join('&#8288;');
+        }, 100);
+      }
+      function onReset() {
+        honkipass.reset();
+        refresh();
+      }
+      function onUpdate() {
+        honkipass.update();
+        refresh();
+      }
+      function onCopy() {
+        const source = document.getElementById('password');
+        source.select();
+        source.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(source.value);
+      }
+      function onChangeValue(id, value) {
+        honkipass.setValue(id, value || document.getElementById(id).value);
+        refresh();
+      }
+      function onToggle(id) {
+        honkipass.toggleFlag(id);
+        refresh();
+      }
+    </script>
+    <link rel="stylesheet" href="bundle/main.css">
+    <title>本気でパスワード 5</title>
+  </head>
+  <body onload="refresh();">
+    <div id="content">
+      <h1>本気でパスワード 5</h1>
+      <div>
+        <md-outlined-text-field id="password" label="パスワード"></md-outlined-text-field>
+      </div>
+      <p id="generationError" class="error">パスワードが生成できませんでした。設定を変えてやり直してください。</p>
+      <p id="repeatableError" class="error">桁数が多いため「同じ文字を繰り返して使用しない」を無効にしました。</p>
+      <div id="chars"></div>
+      <div>
+        <md-slider id="length" min="6" max="32" ticks onchange="onChangeValue('length')"></md-slider>
+        <span id="lengthValue"></span>
+      </div>
+      <div>
+        <md-filled-button onclick="onReset()">リセット</md-filled-button>
+        <md-filled-button onclick="onUpdate()">再生成</md-filled-button>
+        <md-filled-button onclick="onCopy()">コピー</md-filled-button>
+      </div>
+      <div>
+        <md-chip-set>
+          <md-filter-chip id="useAllTypes" label="すべての文字種を使用する" onclick="onToggle('useAllTypes')"></md-filter-chip>
+        </md-chip-set>
+      </div>
+      <div>
+        <md-chip-set>
+          <md-filter-chip id="repeatable" label="同じ文字を繰り返して使用しない" onclick="onToggle('repeatable')"></md-filter-chip>
+        </md-chip-set>
+      </div>
+      <div>
+        <md-chip-set>
+          <md-filter-chip id="charSetStd" label="標準64文字" onclick="onChangeValue('charSet', 'std')"></md-filter-chip>
+          <md-filter-chip id="charSetExt" label="拡張88文字" onclick="onChangeValue('charSet', 'ext')"></md-filter-chip>
+          <md-filter-chip id="charSetAll" label="詳細設定" onclick="onChangeValue('charSet', 'all')"></md-filter-chip>
+        </md-chip-set>
+      </div>
+      <div>
+        <md-chip-set>
+          <md-filter-chip id="useUpperCase" label="ABC" onclick="onToggle('useUpperCase')"></md-filter-chip>
+          <md-filter-chip id="useLowerCase" label="abc" onclick="onToggle('useLowerCase')"></md-filter-chip>
+          <md-filter-chip id="useNumbers" label="123" onclick="onToggle('useNumbers')"></md-filter-chip>
+          <md-filter-chip id="useSymbols" label="@#$" onclick="onToggle('useSymbols')"></md-filter-chip>
+        </md-chip-set>
+      </div>
+      <div>
+        <md-chip-set>
+          <md-filter-chip id="excludesEnabled" label="「除外する文字」を適用する" onclick="onToggle('excludesEnabled')"></md-filter-chip>
+        </md-chip-set>
+      </div>
+      <div>
+        <md-outlined-text-field id="excludes" label="除外する文字" onchange="onChangeValue('excludes')"></md-outlined-text-field>
+      </div>
+    </div>
+  </body>
+</html>

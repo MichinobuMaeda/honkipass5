@@ -1,0 +1,7 @@
+# Custom Dictionary Words
+abcdefghijkmnopqrstuvwxyz
+ABCDEFGHJKLMNOPRSTUVWXYZ
+ABCDEFGHJKLMNPRSTUVWXY
+Egqvu
+plusplus
+Zabcdefghijkmnopqrstuvwxyz
