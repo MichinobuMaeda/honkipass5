@@ -1,5 +1,7 @@
 # honkipass 5
 
+Sample: <https://michinobu.jp/honkipass/>
+
 ## Development
 
 ### Prerequisites
