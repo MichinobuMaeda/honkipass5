@@ -17,7 +17,7 @@ export default class Honkipass {
       this.useNumbers = true;
       this.useSymbols = true;
       this.useAllTypes = true;
-      this.repeatable = false;
+      this.uniqueChars = true;
       this.excludesEnabled = true;
       this.update();
     };
@@ -72,7 +72,7 @@ export default class Honkipass {
           && (!this.useLowerCase || /[a-z]/.test(generated))
           && (!this.useNumbers || /[0-9]/.test(generated))
           && (!this.useSymbols || /[^A-Za-z0-9]/.test(generated))))
-      && (this.repeatable || this.repeatableError || !repeated(generated)));
+      && (this.uniqueChars || this.uniqueCharsError || !repeated(generated)));
 
     this.setValue = (id, val) => {
       this[id] = val;
@@ -82,7 +82,7 @@ export default class Honkipass {
     this.update = () => {
       this.chars = getChars(this.charSet);
       this.generationError = false;
-      this.repeatableError = false;
+      this.uniqueCharsError = false;
 
       if (!this.useUpperCase
           && !this.useLowerCase
@@ -101,7 +101,7 @@ export default class Honkipass {
           .map((val) => val % this.chars.length)
           .reduce((ret, cur) => ret + this.chars.substring(cur, cur + 1), '');
         if (tryCount <= i) {
-          this.repeatableError = true;
+          this.uniqueCharsError = true;
         }
         if (validate(generated)) {
           this.password = generated;
@@ -110,7 +110,7 @@ export default class Honkipass {
         }
       }
       this.generationError = true;
-      this.repeatableError = false;
+      this.uniqueCharsError = false;
     };
 
     this.toggleFlag = (id) => {

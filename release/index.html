@@ -7,30 +7,25 @@
     <script type="text/javascript">
       function refresh() {
         setTimeout(() => {
-          document.getElementById('password').value = honkipass.password;
-          document.getElementById('length').value = honkipass.length;
+          ['password', 'length', 'excludes']
+            .forEach((id) => { document.getElementById(id).value = honkipass[id]; });
           document.getElementById('lengthValue').innerText = honkipass.length;
-          document.getElementById('excludes').value = honkipass.excludes;
           document.getElementById('charSetStd').selected = honkipass.charSet === 'std';
           document.getElementById('charSetExt').selected = honkipass.charSet === 'ext';
           document.getElementById('charSetAll').selected = honkipass.charSet === 'all';
-          document.getElementById('useUpperCase').disabled = honkipass.charSet !== 'all';
-          document.getElementById('useLowerCase').disabled = honkipass.charSet !== 'all';
-          document.getElementById('useNumbers').disabled = honkipass.charSet !== 'all';
-          document.getElementById('useSymbols').disabled = honkipass.charSet !== 'all';
-          document.getElementById('excludesEnabled').disabled = honkipass.charSet !== 'all';
+          ['useUpperCase', 'useLowerCase', 'useNumbers', 'useSymbols', 'useAllTypes', 'uniqueChars', 'excludesEnabled']
+            .forEach((id) => { document.getElementById(id).selected = honkipass[id]; });
+          ['useUpperCase', 'useLowerCase', 'useNumbers', 'useSymbols', 'excludesEnabled']
+            .forEach((id) => { document.getElementById(id).disabled = honkipass.charSet !== 'all'; });
           document.getElementById('excludes').disabled = honkipass.charSet !== 'all' || !honkipass.excludesEnabled;
-          document.getElementById('useUpperCase').selected = honkipass.useUpperCase;
-          document.getElementById('useLowerCase').selected = honkipass.useLowerCase;
-          document.getElementById('useNumbers').selected = honkipass.useNumbers;
-          document.getElementById('useSymbols').selected = honkipass.useSymbols;
-          document.getElementById('useAllTypes').selected = honkipass.useAllTypes;
-          document.getElementById('repeatable').selected = !honkipass.repeatable;
-          document.getElementById('excludesEnabled').selected = honkipass.excludesEnabled;
           document.getElementById('generationError').style.display = honkipass.generationError ? 'block' : 'none';
-          document.getElementById('repeatableError').style.display = honkipass.repeatableError ? 'block' : 'none';
+          document.getElementById('uniqueCharsError').style.display = honkipass.uniqueCharsError ? 'block' : 'none';
           document.getElementById('chars').innerHTML = honkipass.usedChars()
             .map((item) => `<span class="stt-${item.stt}">${item.c}</span>`).join('&#8288;');
+          const val = {};
+          ['length', 'charSet', 'useUpperCase', 'useLowerCase', 'useNumbers', 'useSymbols', 'useAllTypes', 'uniqueChars', 'excludesEnabled', 'excludes']
+            .forEach((id) => { val[id] = honkipass[id]; });
+          localStorage.setItem('honkipass', JSON.stringify(val));
         }, 100);
       }
       function onReset() {
@@ -55,6 +50,14 @@
         honkipass.toggleFlag(id);
         refresh();
       }
+      function init() {
+        const json = localStorage.getItem('honkipass');
+        if (json) {
+          const val = JSON.parse(json);
+          Object.keys(val).forEach((key) => { honkipass[key] = val[key]; });
+        }
+        refresh();
+      }
     </script>
     <link rel="stylesheet" href="bundle/main.css">
     <link rel="apple-touch-icon" sizes="57x57" href="images/apple-icon-57x57.png">
@@ -76,14 +79,14 @@
     <meta name="theme-color" content="#2E8B57">
     <title>本気でパスワード 5</title>
   </head>
-  <body onload="refresh();">
+  <body onload="init();">
     <div id="content">
       <h1>本気でパスワード 5</h1>
       <div>
         <md-outlined-text-field id="password" label="パスワード"></md-outlined-text-field>
       </div>
-      <p id="generationError" class="error">パスワードが生成できませんでした。設定を変えてやり直してください。</p>
-      <p id="repeatableError" class="error">桁数が多いため「同じ文字を繰り返して使用しない」を無効にしました。</p>
+      <p id="generationError" class="error" style="display: none;">パスワードが生成できませんでした。設定を変えてやり直してください。</p>
+      <p id="uniqueCharsError" class="error" style="display: none;">桁数が多いため「同じ文字を繰り返して使用しない」を無効にしました。</p>
       <div id="chars"></div>
       <div>
         <md-slider id="length" min="6" max="32" ticks onchange="onChangeValue('length')"></md-slider>
@@ -101,7 +104,7 @@
       </div>
       <div>
         <md-chip-set>
-          <md-filter-chip id="repeatable" label="同じ文字を繰り返して使用しない" onclick="onToggle('repeatable')"></md-filter-chip>
+          <md-filter-chip id="uniqueChars" label="同じ文字を繰り返して使用しない" onclick="onToggle('uniqueChars')"></md-filter-chip>
         </md-chip-set>
       </div>
       <div>
