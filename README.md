@@ -39,3 +39,5 @@ $ npm create @vite-pwa/pwa@latest honkipass5 -- --template svelte
 $ cd honkipass5
 $ npm install
 ```
+
+Copy some svelte components from <https://github.com/MichinobuMaeda/coarse-paper>
