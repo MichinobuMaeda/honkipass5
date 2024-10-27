@@ -2,6 +2,8 @@
 
 Sample: https://honkipass.michinobu.jp/
 
+![Honkipass v5 UI](honkipass5.png)
+
 ## Prerequisites
 
 -   node >= 20
