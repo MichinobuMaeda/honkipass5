@@ -1,23 +1,39 @@
-# honkipass 5
+# Honkipass v5
 
-Sample: <https://michinobu.jp/honkipass/>
+Sample: https://honkipass.michinobu.jp/
 
-## Development
+## Prerequisites
 
-### Prerequisites
+-   node >= 20
 
-- nvm or node >=18
-
-### Build
+## Build
 
 ```bash
 git clone git@github.com:MichinobuMaeda/honkipass5.git
 cd honkipass5
 npm install
 npm run build
+npm start
 ```
 
-### Tools used
+## Note
 
-- [Material Theme Builder](https://www.figma.com/community/plugin/1034969338659738588/material-theme-builder)
-- [Favicon.ico & App Icon GeneratorFrom Dan's Tools](https://www.favicon-generator.org)
+```bash
+$ npm create @vite-pwa/pwa@latest honkipass5 -- --template svelte
+
+> npx
+> create-pwa honkipass5 --template svelte
+
+✔ PWA Name: … honkipass5
+✔ PWA Short Name: … honkipass5
+✔ PWA Description: …
+✔ Theme color: … #ffffff
+✔ Select a strategy: › generateSW
+✔ Select a behavior: › Prompt for update
+✔ Enable periodic SW updates? … no
+✔ Show offline ready prompt? … no
+✔ Generate PWA Assets Icons on the fly? … yes
+
+$ cd honkipass5
+$ npm install
+```

@@ -1,24 +1,30 @@
 {
   "name": "honkipass5",
-  "version": "1.0.0",
-  "description": "",
-  "main": "stc/index.js",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "rollup --config rollup.config.mjs",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "Michinobu Maeda",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "@material/web": "^1.0.1",
-    "@rollup/plugin-node-resolve": "^15.2.3",
-    "rollup": "^4.3.1"
+    "start": "vite --port 8000",
+    "build": "vite build"
   },
   "devDependencies": {
-    "eslint": "^8.53.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.29.0",
-    "rollup-plugin-scss": "^3.0.0",
-    "sass": "^1.69.5"
+    "@sveltejs/vite-plugin-svelte": "^3.1.0",
+    "@vite-pwa/assets-generator": "^0.2.4",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-svelte": "^2.46.0",
+    "postcss": "^8.4.47",
+    "prettier": "^3.3.3",
+    "prettier-plugin-svelte": "^3.2.7",
+    "svelte": "^4.2.15",
+    "tailwindcss": "^3.4.14",
+    "vite": "^5.2.10",
+    "vite-plugin-pwa": "^0.20.0",
+    "workbox-window": "^7.1.0"
+  },
+  "overrides": {
+    "sharp": "0.32.6",
+    "sharp-ico": "0.1.5"
   }
 }
