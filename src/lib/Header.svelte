@@ -12,6 +12,6 @@
       text-lightOnPrimaryContainer dark:text-darkOnPrimaryContainer"
   >
     <img src={appLogo} alt="Honkipass v5 Logo" class="w-8 h-8 mr-2" />
-    Honkipass v5
+    本気でパスワード v5
   </h1>
 </header>

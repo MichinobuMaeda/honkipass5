@@ -2,7 +2,7 @@
 
 Sample: https://honkipass.michinobu.jp/
 
-![Honkipass v5 UI](honkipass5.png)
+![本気でパスワード v5](honkipass5.png)
 
 ## Prerequisites
 
