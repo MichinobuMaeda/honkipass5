@@ -7,7 +7,7 @@
     bg-lightPrimaryFixedDim dark:bg-darkPrimaryFixedDim"
 >
   <h1
-    class="flex flex-row py-1 px-4 gap-1 w-96 text-xl
+    class="flex flex-row py-1 px-2 w-96 text-2xl
       bg-lightPrimaryContainer dark:bg-darkPrimaryContainer
       text-lightOnPrimaryContainer dark:text-darkOnPrimaryContainer"
   >
