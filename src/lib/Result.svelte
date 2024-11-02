@@ -24,7 +24,7 @@
     {/each}
   </div>
 </div>
-<div class="flex flex-row gap-2">
+<div class="flex flex-row gap-2 sm:gap-8">
   <div class="grow">
     <TextFieldOutlined
       id="password"

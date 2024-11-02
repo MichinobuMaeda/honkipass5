@@ -26,7 +26,7 @@
   } from "../state.svelte";
 </script>
 
-<div class="flex flex-row gap-4 justify-center">
+<div class="flex flex-row gap-4 sm:gap-8 justify-center">
   <div
     class="p-2 w-20 text-right
           text-lightOnBackground dark:text-darkOnBackground"
@@ -61,7 +61,7 @@
     }}
   />
 </div>
-<div class="flex flex-row gap-2 justify-center">
+<div class="flex flex-row gap-2 sm:gap-8 justify-center">
   <ButtonGroup
     id="charSets"
     items={[
@@ -87,7 +87,7 @@
     }}
   />
 </div>
-<div class="flex flex-row gap-2">
+<div class="flex flex-row gap-2 sm:gap-4">
   <Switch
     id="useAllType"
     checked={$useAllTypes}
@@ -98,7 +98,7 @@
   />
   <span class="mt-1">すべての文字種を使用</span>
 </div>
-<div class="flex flex-row gap-2">
+<div class="flex flex-row gap-2 sm:gap-4">
   <Switch
     id="disallowRepeatUse"
     checked={$uniqueChars}
@@ -106,7 +106,7 @@
   />
   <span class="mt-1">同じ文字を使用しない</span>
 </div>
-<div class="flex flex-row gap-2 justify-between">
+<div class="flex flex-row gap-2 sm:gap-4 justify-between">
   <Filter
     id="useUpperCase"
     checked={$useUpperCase}
@@ -136,7 +136,7 @@
     disabled={$charSet != "m"}
   />
 </div>
-<div class="flex flex-row gap-2">
+<div class="flex flex-row gap-2 sm:gap-4">
   <span class="pt-3">
     <Filter
       id="disallowExclusives"

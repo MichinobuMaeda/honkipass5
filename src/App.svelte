@@ -8,19 +8,28 @@
   import Settings from "./lib/Settings.svelte";
 </script>
 
-<Header />
-<main class="flex justify-center">
+<div
+  class="@apply flex flex-row justify-center
+  bg-lightSurfaceVariant dark:bg-darkSurfaceVariant"
+>
   <div
-    class="flex flex-col px-2 pt-2 pb-6 gap-4 w-96
-      bg-lightBackground dark:bg-darkBackground
-      text-lightOnBackground dark:text-darkOnBackground"
+    class="flex flex-col w-full max-w-screen-sm
+  bg-lightBackground dark:bg-darkBackground
+  text-lightOnBackground dark:text-darkOnBackground"
   >
-    <Result />
-    <Settings />
-    <Reset />
+    <div class="flex flex-col min-h-screen justify-between">
+      <Header />
+      <main class="flex justify-center mb-auto">
+        <div class="flex flex-col px-2 pt-2 sm:pt-8 pb-6 gap-4 sm:gap-8">
+          <Result />
+          <Settings />
+          <Reset />
+        </div>
+      </main>
+      <Footer />
+    </div>
   </div>
-</main>
-<Footer />
+</div>
 
 <PWABadge />
 
