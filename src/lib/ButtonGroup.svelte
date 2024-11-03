@@ -1,16 +1,22 @@
 <script>
   import SvgCheck from "./SvgCheck.svelte";
 
-  export let id;
-  export let items;
-  export let onClick;
+  /**
+   * @typedef {Object} Props
+   * @property {string} id
+   * @property {Array} items
+   * @property {function} onClick
+   */
+
+  /** @type {Props} */
+  let { id, items, onClick } = $props();
 </script>
 
 <div {id} role="group" class="inline-flex rounded-md shadow-sm h-10 text-base">
   {#each items as item, index}
     <button
       type="button"
-      on:click={() => {
+      onclick={() => {
         items.forEach((item) => {
           item.selected = false;
         });

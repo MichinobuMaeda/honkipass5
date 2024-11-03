@@ -47,10 +47,10 @@
     needRefresh.set(false);
   }
 
-  $: toast = $needRefresh;
-  $: message = $needRefresh
+  let toast = $derived($needRefresh);
+  let message = $derived($needRefresh
     ? "新しいUIが利用可能です。更新ボタンをクリックしてください。"
-    : "";
+    : "");
 </script>
 
 {#if toast}
@@ -62,7 +62,7 @@
     </div>
     <div class="buttons">
       {#if $needRefresh}
-        <button type="button" on:click={() => updateServiceWorker(true)}>
+        <button type="button" onclick={() => updateServiceWorker(true)}>
           更新
         </button>
       {/if}

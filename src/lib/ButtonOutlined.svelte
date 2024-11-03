@@ -1,9 +1,15 @@
 <script>
-  export let id;
-  export let icon = null;
-  export let label;
-  export let ouClick;
-  export let disabled = false;
+  /**
+   * @typedef {Object} Props
+   * @property {string} id
+   * @property {Object} [icon]
+   * @property {string} label
+   * @property {function} onClick
+   * @property {boolean} [disabled]
+   */
+
+  /** @type {Props} */
+  let { id, icon = null, label, onClick, disabled = false } = $props();
 </script>
 
 <button
@@ -13,11 +19,12 @@
     (disabled
       ? "opacity-30 text-lightOnSurface dark:text-darkOnSurface"
       : "text-lightPrimary dark:text-darkPrimary")}
-  on:click={disabled ? () => {} : ouClick}
+  onclick={disabled ? () => {} : () => onClick()}
 >
   <span class="flex flex-row gap-0.5">
     {#if icon !== null}
-      <svelte:component this={icon} />
+      {@const SvelteComponent = icon}
+      <SvelteComponent />
     {/if}
     {label}
   </span>

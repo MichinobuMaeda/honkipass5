@@ -1,9 +1,15 @@
 <script>
   import SvgCheck from "./SvgCheck.svelte";
 
-  export let id;
-  export let checked = false;
-  export let ouClick;
+  /**
+   * @typedef {Object} Props
+   * @property {any} id
+   * @property {boolean} [checked]
+   * @property {any} onClick
+   */
+
+  /** @type {Props} */
+  let { id, checked = false, onClick } = $props();
 </script>
 
 <label
@@ -19,7 +25,7 @@
     type="checkbox"
     {id}
     {checked}
-    on:click={() => ouClick(!checked)}
+    onclick={() => onClick(!checked)}
     class="peer sr-only
       [&:checked_+_span_svg[data-checked-icon]]:block
       [&:checked_+_span_svg[data-unchecked-icon]]:hidden"

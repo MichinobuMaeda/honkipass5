@@ -36,7 +36,7 @@
   <IconButtonTonal
     id="lengthDn"
     icon={SvgRemove}
-    ouClick={() => {
+    onClick={() => {
       if ($length > minLength) {
         length.set($length - 1);
       }
@@ -45,17 +45,17 @@
   <IconButtonTonal
     id="lengthUp"
     icon={SvgAdd}
-    ouClick={() => length.set($length + 1)}
+    onClick={() => length.set($length + 1)}
   />
   <ButtonTonal
     id="refresh"
     label="+4"
-    ouClick={() => length.set($length + 4)}
+    onClick={() => length.set($length + 4)}
   />
   <ButtonTonal
     id="refresh"
     label="生成"
-    ouClick={() => {
+    onClick={() => {
       tryCount.set(maxTryCount - 1);
       tryCount.set(maxTryCount);
     }}
@@ -91,7 +91,7 @@
   <Switch
     id="useAllType"
     checked={$useAllTypes}
-    ouClick={(v) => {
+    onClick={(v) => {
       useAllTypes.set(v);
       // generated.set(update());
     }}
@@ -102,7 +102,7 @@
   <Switch
     id="disallowRepeatUse"
     checked={$uniqueChars}
-    ouClick={(v) => uniqueChars.set(v)}
+    onClick={(v) => uniqueChars.set(v)}
   />
   <span class="mt-1">同じ文字を使用しない</span>
 </div>
@@ -110,28 +110,28 @@
   <Filter
     id="useUpperCase"
     checked={$useUpperCase}
-    ouClick={(v) => useUpperCase.set(v)}
+    onClick={(v) => useUpperCase.set(v)}
     label="ABC"
     disabled={$charSet != "m"}
   />
   <Filter
     id="useLowerCase"
     checked={$useLowerCase}
-    ouClick={(v) => useLowerCase.set(v)}
+    onClick={(v) => useLowerCase.set(v)}
     label="abc"
     disabled={$charSet != "m"}
   />
   <Filter
     id="useNumerics"
     checked={$useNumerics}
-    ouClick={(v) => useNumerics.set(v)}
+    onClick={(v) => useNumerics.set(v)}
     label="123"
     disabled={$charSet != "m"}
   />
   <Filter
     id="useSymbol"
     checked={$useSymbols}
-    ouClick={(v) => useSymbols.set(v)}
+    onClick={(v) => useSymbols.set(v)}
     label="@#$"
     disabled={$charSet != "m"}
   />
@@ -141,7 +141,7 @@
     <Filter
       id="disallowExclusives"
       checked={$disallowExcluded}
-      ouClick={(v) => disallowExcluded.set(v)}
+      onClick={(v) => disallowExcluded.set(v)}
       label="除外"
       disabled={$charSet != "m"}
     />

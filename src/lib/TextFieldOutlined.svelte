@@ -1,14 +1,31 @@
 <script>
-  export let id;
-  export let type = "text";
-  export let value = "";
-  export let label;
-  export let message = "";
-  export let error = "";
-  export let ouInput;
-  export let readonly = false;
-  export let disabled = false;
-  export let monospace = false;
+  /**
+   * @typedef {Object} Props
+   * @property {string} id
+   * @property {string} [type]
+   * @property {string} [value]
+   * @property {string} label
+   * @property {string} [message]
+   * @property {string} [error]
+   * @property {function} ouInput
+   * @property {boolean} [readonly]
+   * @property {boolean} [disabled]
+   * @property {boolean} [monospace]
+   */
+
+  /** @type {Props} */
+  let {
+    id,
+    type = "text",
+    value = "",
+    label,
+    message = "",
+    error = "",
+    ouInput,
+    readonly = false,
+    disabled = false,
+    monospace = false,
+  } = $props();
 
   const inputEventHandler = (e) => {
     const target = e.target;
@@ -34,7 +51,7 @@
         " placeholder-lightSurface dark:placeholder-darkSurface" +
         (monospace ? " font-mono" : "")}
       placeholder={label}
-      on:input={inputEventHandler}
+      oninput={inputEventHandler}
       {readonly}
       {disabled}
     />

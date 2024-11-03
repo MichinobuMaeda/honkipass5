@@ -39,7 +39,7 @@
     <ButtonFilled
       id="copy"
       label="コピー"
-      ouClick={() => navigator.clipboard.writeText($password)}
+      onClick={() => navigator.clipboard.writeText($password)}
     />
   </span>
 </div>

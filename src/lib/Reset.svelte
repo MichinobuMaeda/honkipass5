@@ -8,7 +8,7 @@
   <ButtonOutlined
     id="reset"
     label="設定リセット"
-    ouClick={reset}
+    onClick={reset}
     disabled={$canReset}
   />
 </div>

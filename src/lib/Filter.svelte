@@ -1,11 +1,17 @@
 <script>
   import SvgCheck from "./SvgCheck.svelte";
 
-  export let id;
-  export let label;
-  export let checked = false;
-  export let ouClick;
-  export let disabled = false;
+  /**
+   * @typedef {Object} Props
+   * @property {string} id
+   * @property {string} label
+   * @property {boolean} [checked]
+   * @property {function} onClick
+   * @property {boolean} [disabled]
+   */
+
+  /** @type {Props} */
+  let { id, label, checked = false, onClick, disabled = false } = $props();
 </script>
 
 <button
@@ -19,9 +25,9 @@
       : checked
         ? "pl-1 border-none bg-lightPrimaryContainer dark:bg-darkPrimaryContainer text-lightOnPrimaryContainer dark:text-darkOnPrimaryContainer"
         : "pl-4 border bg-lightSurface dark:bg-darkSurface text-lightOnSurface dark:text-darkOnSurface border-lightOutlineVariant dark:border-darkOutlineVariant")}
-  on:click={disabled ? () => {} : () => ouClick(!checked)}
+  onclick={disabled ? () => {} : () => onClick(!checked)}
 >
-  <span class="flex flex-row">
+  <span class="flex flex-row gap-0.5">
     {#if checked}
       <SvgCheck />
     {/if}
