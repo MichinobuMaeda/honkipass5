@@ -1,5 +1,6 @@
 <script>
   export let id;
+  export let icon = null;
   export let label;
   export let ouClick;
   export let disabled = false;
@@ -12,5 +13,12 @@
     (disabled
       ? "opacity-30 text-lightOnSurface dark:text-darkOnSurface"
       : "text-lightPrimary dark:text-darkPrimary")}
-  on:click={disabled ? () => {} : ouClick}>{label}</button
+  on:click={disabled ? () => {} : ouClick}
 >
+  <span class="flex flex-row gap-0.5">
+    {#if icon !== null}
+      <svelte:component this={icon} />
+    {/if}
+    {label}
+  </span>
+</button>

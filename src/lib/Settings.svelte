@@ -35,7 +35,7 @@
   </div>
   <IconButtonTonal
     id="lengthDn"
-    svg={SvgRemove}
+    icon={SvgRemove}
     ouClick={() => {
       if ($length > minLength) {
         length.set($length - 1);
@@ -44,7 +44,7 @@
   />
   <IconButtonTonal
     id="lengthUp"
-    svg={SvgAdd}
+    icon={SvgAdd}
     ouClick={() => length.set($length + 1)}
   />
   <ButtonTonal

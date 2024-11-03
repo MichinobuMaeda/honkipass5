@@ -27,7 +27,7 @@
           ? " pl-2 bg-lightSecondaryContainer dark:bg-darkSecondaryContainer text-lightOnSecondaryContainer dark:text-darkOnSecondaryContainer"
           : " pl-4 bg-lightSurface dark:bg-darkSurface text-lightOnSurface dark:text-darkOnSurface")}
     >
-      <span class="flex flex-row">
+      <span class="flex flex-row gap-0.5">
         {#if item.selected}
           <SvgCheck />
         {/if}

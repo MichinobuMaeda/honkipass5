@@ -1,6 +1,6 @@
 <script>
   export let id;
-  export let svg;
+  export let icon;
   export let ouClick;
   export let disabled = false;
 </script>
@@ -14,5 +14,5 @@
       : "bg-lightPrimaryContainer dark:bg-darkPrimaryContainer text-lightOnPrimaryContainer dark:text-darkOnPrimaryContainer")}
   on:click={disabled ? () => {} : ouClick}
 >
-  <svelte:component this={svg} />
+  <svelte:component this={icon} />
 </button>
