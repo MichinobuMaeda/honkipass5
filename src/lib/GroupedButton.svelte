@@ -5,11 +5,11 @@
    * @typedef {Object} Props
    * @property {string} id
    * @property {Array} items
-   * @property {function} onClick
+   * @property {Object} value
    */
 
   /** @type {Props} */
-  let { id, items, onClick } = $props();
+  let { id, items, value = $bindable() } = $props();
 </script>
 
 <div {id} role="group" class="inline-flex rounded-md shadow-sm h-10 text-base">
@@ -17,11 +17,7 @@
     <button
       type="button"
       onclick={() => {
-        items.forEach((item) => {
-          item.selected = false;
-        });
-        item.selected = true;
-        onClick(item.value);
+        value = item.value;
       }}
       class={(index == 0
         ? "pr-4 py-1.5 border-t border-b border-l rounded-l-full"
@@ -29,12 +25,12 @@
           ? "pr-4 py-1.5 border rounded-r-full"
           : "pr-4 py-1.5 border-t border-b border-l") +
         " border-lightOutline dark:border-darkOutline" +
-        (item.selected
+        (value === item.value
           ? " pl-2 bg-lightSecondaryContainer dark:bg-darkSecondaryContainer text-lightOnSecondaryContainer dark:text-darkOnSecondaryContainer"
           : " pl-4 bg-lightSurface dark:bg-darkSurface text-lightOnSurface dark:text-darkOnSurface")}
     >
       <span class="flex flex-row gap-0.5">
-        {#if item.selected}
+        {#if value === item.value}
           <SvgCheck />
         {/if}
         {item.label}

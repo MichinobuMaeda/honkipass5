@@ -5,13 +5,12 @@
    * @typedef {Object} Props
    * @property {string} id
    * @property {string} label
-   * @property {boolean} [checked]
-   * @property {function} onClick
+   * @property {Object} checked
    * @property {boolean} [disabled]
    */
 
   /** @type {Props} */
-  let { id, label, checked = false, onClick, disabled = false } = $props();
+  let { id, label, checked = $bindable(), disabled = false } = $props();
 </script>
 
 <button
@@ -25,7 +24,11 @@
       : checked
         ? "pl-1 border-none bg-lightPrimaryContainer dark:bg-darkPrimaryContainer text-lightOnPrimaryContainer dark:text-darkOnPrimaryContainer"
         : "pl-4 border bg-lightSurface dark:bg-darkSurface text-lightOnSurface dark:text-darkOnSurface border-lightOutlineVariant dark:border-darkOutlineVariant")}
-  onclick={disabled ? () => {} : () => onClick(!checked)}
+  onclick={disabled
+    ? () => {}
+    : () => {
+        checked = !checked;
+      }}
 >
   <span class="flex flex-row gap-0.5">
     {#if checked}

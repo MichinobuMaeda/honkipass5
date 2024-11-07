@@ -1,5 +1,6 @@
 <script>
-  import ButtonGroup from "./ButtonGroup.svelte";
+  import ButtonOutlined from "./ButtonOutlined.svelte";
+  import GroupedButton from "./GroupedButton.svelte";
   import IconButtonTonal from "./IconButtonTonal.svelte";
   import ButtonTonal from "./ButtonTonal.svelte";
   import Switch from "./Switch.svelte";
@@ -9,152 +10,159 @@
   import SvgRemove from "./SvgRemove.svelte";
   import SvgAdd from "./SvgAdd.svelte";
 
+  /**
+   * @typedef {Object} Props
+   * @property {string} chars
+   * @property {string} password
+   */
+
+  /** @type {Props} */
+  let { chars = $bindable(), password = $bindable() } = $props();
+
   import {
+    charSetStd,
+    charSetExt,
     minLength,
-    maxTryCount,
-    length,
-    tryCount,
-    charSet,
-    useAllTypes,
-    uniqueChars,
-    useUpperCase,
-    useLowerCase,
-    useNumerics,
-    useSymbols,
-    disallowExcluded,
-    excluded,
-  } from "../state.svelte";
+    isDefaultValues,
+    getDefaultValues,
+    generateChars,
+    generatePassword,
+  } from "./honkipass";
+
+  let param = $state(getDefaultValues());
+
+  $effect(() => {
+    chars = generateChars(param);
+  });
+
+  $effect(() => {
+    password = generatePassword(chars, param);
+  });
 </script>
 
 <div class="flex flex-row gap-4 sm:gap-8 justify-center">
   <div
     class="p-2 w-20 text-right
-          text-lightOnBackground dark:text-darkOnBackground"
+      text-lightOnBackground dark:text-darkOnBackground"
   >
-    {$length} 文字
+    {param.length} 文字
   </div>
   <IconButtonTonal
     id="lengthDn"
     icon={SvgRemove}
     onClick={() => {
-      if ($length > minLength) {
-        length.set($length - 1);
+      if (param.length > minLength) {
+        param.length--;
       }
     }}
   />
   <IconButtonTonal
     id="lengthUp"
     icon={SvgAdd}
-    onClick={() => length.set($length + 1)}
+    onClick={() => {
+      param.length++;
+    }}
   />
   <ButtonTonal
     id="refresh"
     label="+4"
-    onClick={() => length.set($length + 4)}
+    onClick={() => {
+      param.length += 4;
+    }}
   />
   <ButtonTonal
     id="refresh"
     label="生成"
     onClick={() => {
-      tryCount.set(maxTryCount - 1);
-      tryCount.set(maxTryCount);
+      password = generatePassword(chars, param);
     }}
   />
 </div>
 <div class="flex flex-row gap-2 sm:gap-8 justify-center">
-  <ButtonGroup
+  <GroupedButton
     id="charSets"
     items={[
       {
-        label: "標準64字",
+        label: `標準${charSetStd.length}字`,
         value: "s",
-        selected: $charSet === "s",
+        selected: param.charSet === "s",
       },
       {
-        label: "拡張88字",
+        label: `拡張${charSetExt.length}字`,
         value: "e",
-        selected: $charSet === "e",
+        selected: param.charSet === "e",
       },
       {
         label: "詳細設定",
         value: "m",
-        selected: $charSet === "m",
+        selected: param.charSet === "m",
       },
     ]}
-    onClick={(v) => {
-      charSet.set(v);
-      // generated.set(update());
-    }}
+    bind:value={param.charSet}
   />
 </div>
 <div class="flex flex-row gap-2 sm:gap-4">
-  <Switch
-    id="useAllType"
-    checked={$useAllTypes}
-    onClick={(v) => {
-      useAllTypes.set(v);
-      // generated.set(update());
-    }}
-  />
+  <Switch id="useAllType" bind:checked={param.useAllTypes} />
   <span class="mt-1">すべての文字種を使用</span>
 </div>
 <div class="flex flex-row gap-2 sm:gap-4">
-  <Switch
-    id="disallowRepeatUse"
-    checked={$uniqueChars}
-    onClick={(v) => uniqueChars.set(v)}
-  />
+  <Switch id="disallowRepeatUse" bind:checked={param.uniqueChars} />
   <span class="mt-1">同じ文字を使用しない</span>
 </div>
 <div class="flex flex-row gap-2 sm:gap-4 justify-between">
   <Filter
     id="useUpperCase"
-    checked={$useUpperCase}
-    onClick={(v) => useUpperCase.set(v)}
+    bind:checked={param.useUpperCase}
     label="ABC"
-    disabled={$charSet != "m"}
+    disabled={param.charSet !== "m"}
   />
   <Filter
     id="useLowerCase"
-    checked={$useLowerCase}
-    onClick={(v) => useLowerCase.set(v)}
+    bind:checked={param.useLowerCase}
     label="abc"
-    disabled={$charSet != "m"}
+    disabled={param.charSet !== "m"}
   />
   <Filter
     id="useNumerics"
-    checked={$useNumerics}
-    onClick={(v) => useNumerics.set(v)}
+    bind:checked={param.useNumerics}
     label="123"
-    disabled={$charSet != "m"}
+    disabled={param.charSet !== "m"}
   />
   <Filter
     id="useSymbol"
-    checked={$useSymbols}
-    onClick={(v) => useSymbols.set(v)}
+    bind:checked={param.useSymbols}
     label="@#$"
-    disabled={$charSet != "m"}
+    disabled={param.charSet !== "m"}
   />
 </div>
 <div class="flex flex-row gap-2 sm:gap-4">
   <span class="pt-3">
     <Filter
       id="disallowExclusives"
-      checked={$disallowExcluded}
-      onClick={(v) => disallowExcluded.set(v)}
+      bind:checked={param.disallowExcluded}
       label="除外"
-      disabled={$charSet != "m"}
+      disabled={param.charSet !== "m"}
     />
   </span>
   <span class="grow">
     <TextFieldOutlined
       id="TextFieldOutlined1"
       label="除外対象"
-      value={$excluded}
+      bind:value={param.excluded}
       message=""
-      ouInput={(v) => excluded.set(v)}
-      disabled={$charSet != "m" || !$disallowExcluded}
+      disabled={param.charSet !== "m" || !param.disallowExcluded}
       monospace
     />
   </span>
+</div>
+
+<div class="flex flex-row gap-2">
+  <ButtonOutlined
+    id="reset"
+    label="設定リセット"
+    onClick={() => {
+      param = getDefaultValues();
+    }}
+    disabled={isDefaultValues(param)}
+  />
 </div>

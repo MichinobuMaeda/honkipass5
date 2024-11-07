@@ -2,7 +2,16 @@
   import ButtonFilled from "./ButtonFilled.svelte";
   import TextFieldOutlined from "./TextFieldOutlined.svelte";
 
-  import { password, chars, charSetAll } from "../state.svelte";
+  import { charSetAll } from "./honkipass";
+
+  /**
+   * @typedef {Object} Props
+   * @property {string} chars
+   * @property {string} password
+   */
+
+  /** @type {Props} */
+  let { chars, password } = $props();
 </script>
 
 <div class="flex justify-center">
@@ -10,16 +19,17 @@
     {#each charSetAll.split("") as char, index}
       {#if index > 0 && index % 32 === 0}
         <br />
-      {/if}{#if $password.indexOf(char) >= 0}
+      {/if}{#if password.indexOf(char) >= 0}
         <span
-          class="bg-lightPrimaryContainer dark:bg-darkPrimaryContainer
+          class="sm:px-0.5
+            bg-lightPrimaryContainer dark:bg-darkPrimaryContainer
             text-lightOnPrimaryContainer dark:text-darkOnPrimaryContainer"
           >{char}</span
         >
-      {:else if $chars.indexOf(char) >= 0}
-        <span class="">{char}</span>
+      {:else if chars.indexOf(char) >= 0}
+        <span class="sm:px-0.5">{char}</span>
       {:else}
-        <span class="opacity-30">{char}</span>
+        <span class="sm:px-0.5 opacity-30">{char}</span>
       {/if}
     {/each}
   </div>
@@ -28,9 +38,8 @@
   <div class="grow">
     <TextFieldOutlined
       id="password"
-      value={$password}
+      value={password}
       label="パスワード"
-      ouInput={() => {}}
       readonly
       monospace
     />
@@ -39,7 +48,7 @@
     <ButtonFilled
       id="copy"
       label="コピー"
-      onClick={() => navigator.clipboard.writeText($password)}
+      onClick={() => navigator.clipboard.writeText(password)}
     />
   </span>
 </div>
