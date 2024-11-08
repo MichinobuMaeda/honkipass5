@@ -11,7 +11,7 @@
 </script>
 
 <div
-  class="@apply flex flex-row justify-center
+  class="flex flex-row justify-center
     bg-lightSurfaceVariant dark:bg-darkSurfaceVariant"
 >
   <div
