@@ -5,9 +5,10 @@
 
   import Result from "./lib/Result.svelte";
   import Settings from "./lib/Settings.svelte";
+  import Reset from "./lib/Reset.svelte";
+  import { getDefaultValues } from "./lib/honkipass";
 
-  let chars = $state("");
-  let password = $state("");
+  let param = $state(getDefaultValues());
 </script>
 
 <div
@@ -23,8 +24,9 @@
       <Header />
       <main class="flex justify-center mb-auto">
         <div class="flex flex-col px-2 pt-2 sm:pt-8 pb-6 gap-4 sm:gap-8">
-          <Result {chars} {password} />
-          <Settings bind:chars bind:password />
+          <Result {param} />
+          <Settings bind:param />
+          <Reset bind:param />
         </div>
       </main>
       <Footer />
@@ -33,6 +35,3 @@
 </div>
 
 <PWABadge />
-
-<style>
-</style>

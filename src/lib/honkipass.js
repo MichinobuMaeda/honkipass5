@@ -1,16 +1,18 @@
 export const minLength = 6;
-export const maxTryCount = 1000;
+const maxTryCount = 1000;
 
-export const defaultLength = 8;
-export const defaultCharSet = "s";
-export const defaultUseAllType = true;
-export const defaultUniqueChars = true;
-export const defaultUseUpperCase = true;
-export const defaultUseLowerCase = true;
-export const defaultUseNumerics = true;
-export const defaultUseSymbol = true;
-export const defaultDisallowExcluded = true;
-export const defaultExcluded = "Il10O8B3Egqvu!|[]{}";
+const defaultValues = {
+  length: 8,
+  charSet: "s",
+  useAllTypes: true,
+  uniqueChars: true,
+  useUpperCase: true,
+  useLowerCase: true,
+  useNumerics: true,
+  useSymbols: true,
+  disallowExcluded: true,
+  excluded: "Il10O8B3Egqvu!|[]{}",
+};
 
 export const charSetAll =
   "!\"#$%&'()*+,-./0123456789:;<=>?@" +
@@ -29,18 +31,7 @@ export const charSetExt =
  * Get default values
  * @returns {Object}
  */
-export const getDefaultValues = () => ({
-  length: defaultLength,
-  charSet: defaultCharSet,
-  useAllTypes: defaultUseAllType,
-  uniqueChars: defaultUniqueChars,
-  useUpperCase: defaultUseUpperCase,
-  useLowerCase: defaultUseLowerCase,
-  useNumerics: defaultUseNumerics,
-  useSymbols: defaultUseSymbol,
-  disallowExcluded: defaultDisallowExcluded,
-  excluded: defaultExcluded,
-});
+export const getDefaultValues = () => ({ ...defaultValues });
 
 /**
  * Check if the values are default values
@@ -48,16 +39,7 @@ export const getDefaultValues = () => ({
  * @returns {boolean}
  */
 export const isDefaultValues = (param) =>
-  param.length === defaultLength &&
-  param.charSet === defaultCharSet &&
-  param.useAllTypes === defaultUseAllType &&
-  param.uniqueChars === defaultUniqueChars &&
-  param.useUpperCase === defaultUseUpperCase &&
-  param.useLowerCase === defaultUseLowerCase &&
-  param.useNumerics === defaultUseNumerics &&
-  param.useSymbols === defaultUseSymbol &&
-  param.disallowExcluded === defaultDisallowExcluded &&
-  param.excluded === defaultExcluded;
+  Object.keys(defaultValues).every((key) => param[key] === defaultValues[key]);
 
 /**
  * Generate character set for password
@@ -85,9 +67,9 @@ export const generateChars = (param) => {
         ret = ret.replace(/[^A-Za-z0-9]/g, "");
       }
       if (param.disallowExcluded) {
-        for (let i = 0; i < param.excluded.length; ++i) {
-          ret = ret.replaceAll(param.excluded.substring(i, i + 1), "");
-        }
+        param.excluded.split("").forEach((c) => {
+          ret = ret.replace(c, "");
+        });
       }
       break;
     default: // "s"
@@ -98,42 +80,49 @@ export const generateChars = (param) => {
 };
 
 /**
- * Check if the string has unique characters
- * @param {string} val
- * @returns {boolean}
+ * Generate candidate
+ * @param {object} param
+ * @returns {string}
  */
-const isUnique = (val) => {
-  for (let i = 0; i < val.length - 1; ++i) {
-    if (val.indexOf(val.substring(i, i + 1), i + 1) >= 0) {
-      return false;
-    }
-  }
-  return true;
+const generateCandidate = (param) => {
+  const chars = generateChars(param);
+  const buff = new Uint32Array(param.length);
+  self.crypto.getRandomValues(buff);
+  return buff.reduce((p, c) => p + chars.charAt(c % chars.length), "");
 };
 
 /**
- * Generate password
- * @param {string} chars
+ * Validate password
  * @param {object} param
- * @returns
+ * @param {string} password
+ * @returns {boolean}
  */
-export const generatePassword = (chars, param) => {
+const validatePassword = (param, password) =>
+  password.length === param.length &&
+  (!param.useAllTypes ||
+    ((!param.useUpperCase || /[A-Z]/.test(password)) &&
+      (!param.useLowerCase || /[a-z]/.test(password)) &&
+      (!param.useNumerics || /[0-9]/.test(password)) &&
+      (!param.useSymbols || /[^A-Za-z0-9]/.test(password)))) &&
+  (!param.uniqueChars ||
+    password.split("").every((c, i, all) => !all.slice(i + 1).includes(c)));
+
+/**
+ * Generate password
+ * @param {object} param
+ * @returns {string}
+ */
+export const generatePassword = (param) => {
   for (let i = 0; i < maxTryCount; ++i) {
-    let ret = "";
-    for (let j = 0; j < param.length; ++j) {
-      ret += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    if (
-      ret.length === param.length &&
-      (!param.useAllTypes ||
-        ((!param.useUpperCase || /[A-Z]/.test(ret)) &&
-          (!param.useLowerCase || /[a-z]/.test(ret)) &&
-          (!param.useNumerics || /[0-9]/.test(ret)) &&
-          (!param.useSymbols || /[^A-Za-z0-9]/.test(ret)))) &&
-      (!param.uniqueChars || isUnique(ret))
-    ) {
-      return ret;
+    const password = generateCandidate(param);
+    if (validatePassword(param, password)) {
+      return password;
     }
   }
-  return "Error";
+  return "";
+};
+
+export const exportedForTesting = {
+  generateCandidate,
+  validatePassword,
 };

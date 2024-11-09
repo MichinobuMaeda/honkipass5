@@ -1,43 +1,23 @@
 <script>
-  import ButtonOutlined from "./ButtonOutlined.svelte";
   import GroupedButton from "./GroupedButton.svelte";
   import IconButtonTonal from "./IconButtonTonal.svelte";
   import ButtonTonal from "./ButtonTonal.svelte";
+  import ButtonFilled from "./ButtonFilled.svelte";
   import Switch from "./Switch.svelte";
   import Filter from "./Filter.svelte";
   import TextFieldOutlined from "./TextFieldOutlined.svelte";
 
   import SvgRemove from "./SvgRemove.svelte";
   import SvgAdd from "./SvgAdd.svelte";
+  import { charSetStd, charSetExt, minLength } from "./honkipass";
 
   /**
    * @typedef {Object} Props
-   * @property {string} chars
-   * @property {string} password
+   * @property {Object} param
    */
 
   /** @type {Props} */
-  let { chars = $bindable(), password = $bindable() } = $props();
-
-  import {
-    charSetStd,
-    charSetExt,
-    minLength,
-    isDefaultValues,
-    getDefaultValues,
-    generateChars,
-    generatePassword,
-  } from "./honkipass";
-
-  let param = $state(getDefaultValues());
-
-  $effect(() => {
-    chars = generateChars(param);
-  });
-
-  $effect(() => {
-    password = generatePassword(chars, param);
-  });
+  let { param = $bindable() } = $props();
 </script>
 
 <div class="flex flex-row gap-4 sm:gap-8 justify-center">
@@ -70,11 +50,11 @@
       param.length += 4;
     }}
   />
-  <ButtonTonal
+  <ButtonFilled
     id="refresh"
     label="生成"
     onClick={() => {
-      password = generatePassword(chars, param);
+      param = { ...param };
     }}
   />
 </div>
@@ -154,15 +134,4 @@
       monospace
     />
   </span>
-</div>
-
-<div class="flex flex-row gap-2">
-  <ButtonOutlined
-    id="reset"
-    label="設定リセット"
-    onClick={() => {
-      param = getDefaultValues();
-    }}
-    disabled={isDefaultValues(param)}
-  />
 </div>

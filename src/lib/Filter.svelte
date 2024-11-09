@@ -19,11 +19,21 @@
   class={"pr-4 py-0.5 rounded-lg h-8 text-base " +
     (disabled
       ? checked
-        ? "opacity-50 pl-1 border-none bg-lightSurfaceDim dark:bg-darkSurfaceDim text-lightOnSurface dark:text-darkOnSurface"
-        : "opacity-50 pl-4 border bg-lightSurface dark:bg-darkSurface text-lightOnSurface dark:text-darkOnSurface border-lightOutlineVariant dark:border-darkOutlineVariant"
+        ? "opacity-50 pl-1 border-none " +
+          "bg-lightSurfaceDim dark:bg-darkSurfaceDim " +
+          "text-lightOnSurface dark:text-darkOnSurface"
+        : "opacity-50 pl-4 border " +
+          "bg-lightSurface dark:bg-darkSurface " +
+          "text-lightOnSurface dark:text-darkOnSurface " +
+          "border-lightOutlineVariant dark:border-darkOutlineVariant"
       : checked
-        ? "pl-1 border-none bg-lightPrimaryContainer dark:bg-darkPrimaryContainer text-lightOnPrimaryContainer dark:text-darkOnPrimaryContainer"
-        : "pl-4 border bg-lightSurface dark:bg-darkSurface text-lightOnSurface dark:text-darkOnSurface border-lightOutlineVariant dark:border-darkOutlineVariant")}
+        ? "pl-1 border-none " +
+          "bg-lightPrimaryContainer dark:bg-darkPrimaryContainer " +
+          "text-lightOnPrimaryContainer dark:text-darkOnPrimaryContainer"
+        : "pl-4 border " +
+          "bg-lightSurface dark:bg-darkSurface " +
+          "text-lightOnSurface dark:text-darkOnSurface " +
+          "border-lightOutlineVariant dark:border-darkOutlineVariant")}
   onclick={disabled
     ? () => {}
     : () => {

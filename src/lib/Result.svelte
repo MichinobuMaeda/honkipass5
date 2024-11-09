@@ -3,15 +3,25 @@
   import TextFieldOutlined from "./TextFieldOutlined.svelte";
 
   import { charSetAll } from "./honkipass";
+  import { generateChars, generatePassword } from "./honkipass";
 
   /**
    * @typedef {Object} Props
-   * @property {string} chars
-   * @property {string} password
+   * @property {Object} param
    */
 
   /** @type {Props} */
-  let { chars, password } = $props();
+  let { param } = $props();
+
+  let chars = $derived(generateChars(param));
+  let password = $derived(generatePassword(param));
+  let message = $state("");
+
+  $effect(() => {
+    if (password) {
+      message = "";
+    }
+  });
 </script>
 
 <div class="flex justify-center">
@@ -42,13 +52,19 @@
       label="パスワード"
       readonly
       monospace
+      {message}
+      error={password ? "" : "設定を変更してやり直してください"}
     />
   </div>
   <span class="pt-2">
     <ButtonFilled
       id="copy"
       label="コピー"
-      onClick={() => navigator.clipboard.writeText(password)}
+      onClick={() => {
+        navigator.clipboard.writeText(password);
+        message = "コピーしました";
+      }}
+      disabled={!password}
     />
   </span>
 </div>

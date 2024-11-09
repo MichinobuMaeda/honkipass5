@@ -38,18 +38,20 @@
       {id}
       {type}
       bind:value
-      class={"peer border-none focus:border-none focus:outline-none focus:ring-0 w-full text-base" +
-        " bg-lightSurface dark:bg-darkSurface" +
-        " text-lightOnSurface dark:text-darkOnSurface" +
-        " placeholder-lightSurface dark:placeholder-darkSurface" +
+      class={"peer border-none w-full text-base " +
+        "focus:border-none focus:outline-none focus:ring-0 " +
+        "bg-lightSurface dark:bg-darkSurface " +
+        "text-lightOnSurface dark:text-darkOnSurface " +
+        "placeholder-lightSurface dark:placeholder-darkSurface" +
         (monospace ? " font-mono" : "")}
       placeholder={label}
       {readonly}
       {disabled}
     />
     <span
-      class="peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs
-        pointer-events-none absolute start-2 top-0 -translate-y-1/2 p-0.5 text-xs transition-all
+      class="peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm
+        peer-focus:top-0 peer-focus:text-xs pointer-events-none
+        absolute start-2 top-0 -translate-y-1/2 p-0.5 text-xs transition-all
         bg-lightSurface dark:bg-darkSurface
         text-lightOnSurfaceVariant dark:text-darkOnSurfaceVariant"
     >
@@ -57,11 +59,18 @@
     </span>
   </label>
   {#if !error}
-    <div class="text-sm pl-2 text-lightOnSurface dark:text-darkOnSurface">
+    <div
+      class="text-sm pl-2
+        text-lightOnSurface dark:text-darkOnSurface"
+    >
       {message}
     </div>
+  {:else}
+    <div
+      class="text-sm pl-2
+        text-lightError dark:text-darkError"
+    >
+      {error}
+    </div>
   {/if}
-  <div class="text-sm pl-2 text-lightError dark:text-darkError">
-    {error}
-  </div>
 </div>
