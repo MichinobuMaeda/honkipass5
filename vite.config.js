@@ -20,6 +20,8 @@ export default defineConfig({
         short_name: "本気でパスワード v5",
         description: "honkipass5",
         theme_color: "#63A002",
+        background_color: "#63A002",
+        lang: "ja",
       },
 
       workbox: {
