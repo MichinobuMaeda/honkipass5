@@ -15,8 +15,5 @@
   "eslint.useFlatConfig": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "javascript.validate.enable": false,
-  "typescript.validate.enable": false,
-  "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
-  }
+  "typescript.validate.enable": false
 }
