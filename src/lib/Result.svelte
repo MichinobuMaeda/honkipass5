@@ -14,7 +14,7 @@
    */
 
   /** @type {Props} */
-  let { param } = $props();
+  let { param = $bindable() } = $props();
 
   let chars = $derived(generateChars(param));
   let password = $derived(generatePassword(param));

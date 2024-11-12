@@ -23,7 +23,7 @@
       <Header />
       <main class="flex justify-center mb-auto">
         <div class="flex flex-col px-1 pt-4 sm:pt-8 pb-6 gap-4 sm:gap-8">
-          <Result {param} />
+          <Result bind:param />
           <Settings bind:param />
         </div>
       </main>
