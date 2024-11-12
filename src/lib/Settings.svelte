@@ -1,15 +1,22 @@
 <script>
   import GroupedButton from "./GroupedButton.svelte";
+  import IconButtonOutlined from "./IconButtonOutlined.svelte";
   import IconButtonTonal from "./IconButtonTonal.svelte";
   import ButtonTonal from "./ButtonTonal.svelte";
-  import ButtonFilled from "./ButtonFilled.svelte";
   import Switch from "./Switch.svelte";
   import Filter from "./Filter.svelte";
   import TextFieldOutlined from "./TextFieldOutlined.svelte";
 
+  import SvgResetSettings from "./SvgResetSettings.svelte";
   import SvgRemove from "./SvgRemove.svelte";
   import SvgAdd from "./SvgAdd.svelte";
-  import { charSetStd, charSetExt, minLength } from "./honkipass";
+  import {
+    charSetStd,
+    charSetExt,
+    minLength,
+    getDefaultValues,
+    isDefaultValues,
+  } from "./honkipass";
 
   /**
    * @typedef {Object} Props
@@ -20,9 +27,17 @@
   let { param = $bindable() } = $props();
 </script>
 
-<div class="flex flex-row gap-4 sm:gap-8 justify-center">
+<div class="flex flex-row gap-4 sm:gap-8">
+  <IconButtonOutlined
+    id="reset"
+    icon={SvgResetSettings}
+    onClick={() => {
+      param = getDefaultValues();
+    }}
+    disabled={isDefaultValues(param)}
+  />
   <div
-    class="p-2 w-20 text-right
+    class="w-20 text-right mt-2
       text-lightOnBackground dark:text-darkOnBackground"
   >
     {param.length} 文字
@@ -44,17 +59,10 @@
     }}
   />
   <ButtonTonal
-    id="refresh"
+    id="lengthUp4"
     label="+4"
     onClick={() => {
       param.length += 4;
-    }}
-  />
-  <ButtonFilled
-    id="refresh"
-    label="生成"
-    onClick={() => {
-      param = { ...param };
     }}
   />
 </div>

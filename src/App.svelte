@@ -5,7 +5,6 @@
 
   import Result from "./lib/Result.svelte";
   import Settings from "./lib/Settings.svelte";
-  import Reset from "./lib/Reset.svelte";
   import { getDefaultValues } from "./lib/honkipass";
 
   let param = $state(getDefaultValues());
@@ -23,10 +22,9 @@
     <div class="flex flex-col min-h-screen justify-between">
       <Header />
       <main class="flex justify-center mb-auto">
-        <div class="flex flex-col px-2 pt-2 sm:pt-8 pb-6 gap-4 sm:gap-8">
+        <div class="flex flex-col px-1 pt-4 sm:pt-8 pb-6 gap-4 sm:gap-8">
           <Result {param} />
           <Settings bind:param />
-          <Reset bind:param />
         </div>
       </main>
       <Footer />

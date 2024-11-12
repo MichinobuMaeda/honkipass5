@@ -2,20 +2,21 @@
   /**
    * @typedef {Object} Props
    * @property {string} id
-   * @property {import("svelte").Component} [icon]
-   * @property {string} label
+   * @property {import("svelte").Component} icon
    * @property {function} onClick
    * @property {boolean} [disabled]
    */
 
   /** @type {Props} */
-  let { id, icon = null, label, onClick, disabled = false } = $props();
+  let { id, icon, onClick, disabled = false } = $props();
+
+  const SvgIcon = $derived(icon);
 </script>
 
 <button
   {id}
   type="button"
-  class={"px-5 py-1.5 border-none rounded-full h-10 text-base " +
+  class={"size-10 px-2 py-1 border-none rounded-full text-base " +
     (disabled
       ? "opacity-50 " +
         "bg-lightSurfaceDim dark:bg-darkSurfaceDim " +
@@ -24,11 +25,5 @@
         "text-lightOnPrimary dark:text-darkOnPrimary")}
   onclick={disabled ? () => {} : () => onClick()}
 >
-  <span class="flex flex-row gap-0.5">
-    {#if icon !== null}
-      {@const SvgIcon = icon}
-      <SvgIcon />
-    {/if}
-    {label}
-  </span>
+  <SvgIcon />
 </button>

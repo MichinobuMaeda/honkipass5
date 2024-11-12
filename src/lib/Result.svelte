@@ -1,6 +1,9 @@
 <script>
-  import ButtonFilled from "./ButtonFilled.svelte";
+  import IconButtonTonal from "./IconButtonTonal.svelte";
+  import IconButtonFilled from "./IconButtonFilled.svelte";
   import TextFieldOutlined from "./TextFieldOutlined.svelte";
+  import SvgContentCopy from "./SvgContentCopy.svelte";
+  import SvgRefresh from "./SvgRefresh.svelte";
 
   import { charSetAll } from "./honkipass";
   import { generateChars, generatePassword } from "./honkipass";
@@ -15,12 +18,12 @@
 
   let chars = $derived(generateChars(param));
   let password = $derived(generatePassword(param));
-  let message = $state("");
+  let message = $state("パスワードを生成しました");
+  let error = $state("");
 
   $effect(() => {
-    if (password) {
-      message = "";
-    }
+    message = "パスワードを生成しました";
+    error = password ? "" : "設定を変更してやり直してください";
   });
 </script>
 
@@ -53,18 +56,25 @@
       readonly
       monospace
       {message}
-      error={password ? "" : "設定を変更してやり直してください"}
+      {error}
     />
   </div>
-  <span class="pt-2">
-    <ButtonFilled
+  <span class="flex pt-2 gap-4 sm:gap-8">
+    <IconButtonTonal
+      id="refresh"
+      icon={SvgRefresh}
+      onClick={() => {
+        param = { ...param };
+      }}
+    />
+    <IconButtonFilled
       id="copy"
-      label="コピー"
+      icon={SvgContentCopy}
       onClick={() => {
         navigator.clipboard.writeText(password);
         message = "コピーしました";
       }}
-      disabled={!password}
+      disabled={!!error}
     />
   </span>
 </div>

@@ -7,6 +7,9 @@ export default defineConfig({
   plugins: [
     svelte(),
     VitePWA({
+      strategies: "injectManifest",
+      srcDir: "src",
+      filename: "sw.js",
       registerType: "prompt",
       injectRegister: false,
 
@@ -24,10 +27,8 @@ export default defineConfig({
         lang: "ja",
       },
 
-      workbox: {
+      injectManifest: {
         globPatterns: ["**/*.{js,css,html,svg,png,ico}"],
-        cleanupOutdatedCaches: true,
-        clientsClaim: true,
       },
 
       devOptions: {
