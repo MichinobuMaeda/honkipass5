@@ -18,11 +18,12 @@
 
   let chars = $derived(generateChars(param));
   let password = $derived(generatePassword(param));
-  let message = $state("パスワードを生成しました");
+  const messageGenerated = "パスワードを生成しました";
+  let message = $state(messageGenerated);
   let error = $state("");
 
   $effect(() => {
-    message = "パスワードを生成しました";
+    message = messageGenerated;
     error = password ? "" : "設定を変更してやり直してください";
   });
 </script>

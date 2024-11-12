@@ -3,7 +3,7 @@
 
   // periodic sync is disabled, change the value to enable it, the period is in milliseconds
   // You can remove onRegisteredSW callback and registerPeriodicSync function
-  const period = 0;
+  const period = 300 * 1000;
 
   /**
    * This function will register a periodic sync check every hour, you can modify the interval as needed.
@@ -48,9 +48,11 @@
   }
 
   let toast = $derived($needRefresh);
-  let message = $derived($needRefresh
-    ? "新しいUIが利用可能です。更新ボタンをクリックしてください。"
-    : "");
+  let message = $derived(
+    $needRefresh
+      ? "新しいUIが利用可能です。更新ボタンをクリックしてください。"
+      : "",
+  );
 </script>
 
 {#if toast}
