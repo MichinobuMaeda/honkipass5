@@ -1,43 +1,38 @@
-# Honkipass v5
+# sv
 
-Sample: https://honkipass.michinobu.jp/
+Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-![本気でパスワード v5](honkipass5.png)
+## Creating a project
 
-## Prerequisites
-
--   node >= 20
-
-## Build
+If you're seeing this, you've probably already done this step. Congrats!
 
 ```bash
-git clone git@github.com:MichinobuMaeda/honkipass5.git
-cd honkipass5
-npm install
+# create a new project in the current directory
+npx sv create
+
+# create a new project in my-app
+npx sv create my-app
+```
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```bash
 npm run build
-npm start
 ```
 
-## Note
+You can preview the production build with `npm run preview`.
 
-```bash
-$ npm create @vite-pwa/pwa@latest honkipass5 -- --template svelte
-
-> npx
-> create-pwa honkipass5 --template svelte
-
-✔ PWA Name: … honkipass5
-✔ PWA Short Name: … honkipass5
-✔ PWA Description: …
-✔ Theme color: … #ffffff
-✔ Select a strategy: › generateSW
-✔ Select a behavior: › Prompt for update
-✔ Enable periodic SW updates? … no
-✔ Show offline ready prompt? … no
-✔ Generate PWA Assets Icons on the fly? … yes
-
-$ cd honkipass5
-$ npm install
-```
-
-Copy some svelte components from <https://github.com/MichinobuMaeda/coarse-paper>
+> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
