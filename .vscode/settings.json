@@ -1,0 +1,22 @@
+{
+	"cSpell.words": [
+		"abcdefghijkmnopqrstuvwxyz",
+		"ABCDEFGHJKLMNOPRSTUVWXYZ",
+		"ABCDEFGHJKLMNPRSTUVWXY",
+		"ABCDEFGHJKLMNPRSTUVWXYZ",
+		"Egqvu",
+		"Honkipass",
+		"Maeda",
+		"Michinobu",
+		"nocheck",
+		"precache",
+		"precaching",
+		"tailwindcss",
+		"Zabcdefghijkmnopqrstuvwxyz"
+	],
+	"eslint.validate": ["javascript", "javascriptreact", "svelte"],
+	"eslint.useFlatConfig": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"javascript.validate.enable": false,
+	"typescript.validate.enable": false
+}

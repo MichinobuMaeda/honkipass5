@@ -1,38 +1,37 @@
-# sv
+# Honkipass v5
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Sample: https://honkipass.michinobu.jp/
 
-## Creating a project
+![本気でパスワード v5](honkipass5.png)
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Prerequisites
 
-```bash
-# create a new project in the current directory
-npx sv create
+-   node >= 20
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Build
 
 ```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
+git clone git@github.com:MichinobuMaeda/honkipass5.git
+cd honkipass5
+npm install
 npm run build
+npm start
 ```
 
-You can preview the production build with `npm run preview`.
+## Note
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+```bash
+$ npx sv create honkipass5
+ Which template would you like?
+ SvelteKit minimal
+ Add type checking with Typescript?
+ Yes, using Javascript with JSDoc comments
+ What would you like to add to your project? (use arrow keys / space bar)
+ prettier, eslint, vitest, tailwindcss
+ tailwindcss: Which plugins would you like to add?
+ none
+ Which package manager do you want to install dependencies with?
+ npm
+```
+
+Copy some svelte components from <https://github.com/MichinobuMaeda/coarse-paper>
