@@ -1,5 +1,6 @@
 <script>
 	import PWABadge from '$lib/PWABadge.svelte';
+	import { version } from '$app/environment';
 	// import appLogo from '/favicon.svg';
 	import '../app.css';
 	let { children } = $props();
@@ -38,10 +39,11 @@
 			>
 				© 2024 Michinobu Maeda
 				<a
-					class="mx-4 text-lightInversePrimary underline
+					class="mx-2 text-lightInversePrimary underline
         underline-offset-2 dark:text-darkInversePrimary"
 					href="https://github.com/MichinobuMaeda/honkipass5">Source</a
 				>
+				v{version}
 			</footer>
 		</div>
 	</div>

@@ -1,16 +1,15 @@
-import { defineConfig } from 'vitest/config';
 import { sveltekit } from '@sveltejs/kit/vite';
-import { VitePWA } from 'vite-plugin-pwa';
+import { defineConfig } from 'vite';
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
 
 export default defineConfig({
 	plugins: [
 		sveltekit(),
-		VitePWA({
+		SvelteKitPWA({
 			strategies: 'injectManifest',
-			srcDir: 'src',
-			filename: 'sw.js',
-			registerType: 'prompt',
-			injectRegister: false,
+			srcDir: './src',
+			filename: 'service-worker.js',
+			registerType: 'autoUpdate',
 
 			pwaAssets: {
 				disabled: false,
@@ -26,8 +25,12 @@ export default defineConfig({
 				lang: 'ja'
 			},
 
+			workbox: {
+				globPatterns: ['client/**/*.{js,html,css,svg,png,ico}']
+			},
+
 			injectManifest: {
-				globPatterns: ['**/*.{js,css,html,svg,png,ico}']
+				globPatterns: ['**/*.{js,html,css,svg,png,ico}']
 			},
 
 			devOptions: {
@@ -35,11 +38,11 @@ export default defineConfig({
 				navigateFallback: 'index.html',
 				suppressWarnings: true,
 				type: 'module'
+			},
+
+			kit: {
+				includeVersionFile: true
 			}
 		})
-	],
-
-	test: {
-		include: ['src/**/*.{test,spec}.{js,ts}']
-	}
+	]
 });

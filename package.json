@@ -1,18 +1,17 @@
 {
 	"name": "honkipass5",
-	"version": "0.0.1",
+	"version": "1.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build",
+		"build:patch-sw": "sed -i -e \"s/ce(\\[/\\0\\{\\\"revision\\\":\\\"`md5 -q build/index.html`\\\",\\\"url\\\":\\\"index.html\\\"},/g\" build/service-worker.js",
+		"build": "vite build && npm run build:patch-sw",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-		"start": "vite --port 8000",
-		"test:unit": "vitest",
-		"test": "npm run test:unit -- --run"
+		"start": "vite --port 8000"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^3.0.0",
@@ -21,6 +20,7 @@
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@types/eslint": "^9.6.0",
 		"@vite-pwa/assets-generator": "^0.2.6",
+		"@vite-pwa/sveltekit": "^0.6.6",
 		"autoprefixer": "^10.4.20",
 		"eslint": "^9.7.0",
 		"eslint-config-prettier": "^9.1.0",
@@ -33,8 +33,6 @@
 		"svelte-check": "^4.0.0",
 		"tailwindcss": "^3.4.9",
 		"typescript": "^5.0.0",
-		"vite": "^5.0.3",
-		"vite-plugin-pwa": "^0.21.0",
-		"vitest": "^2.0.4"
+		"vite": "^5.0.3"
 	}
 }

@@ -33,8 +33,13 @@
 	let error = $state('');
 
 	$effect(() => {
-		message = messageGenerated;
+		message = '...';
 		error = password ? '' : '設定を変更してやり直してください';
+		setInterval(() => {
+			if (message == '...') {
+				message = messageGenerated;
+			}
+		}, 500);
 	});
 </script>
 
