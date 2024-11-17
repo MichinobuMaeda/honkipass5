@@ -27,7 +27,7 @@ $ npx sv create honkipass5
  Add type checking with Typescript?
  Yes, using Javascript with JSDoc comments
  What would you like to add to your project? (use arrow keys / space bar)
- prettier, eslint, vitest, tailwindcss
+ prettier, eslint, tailwindcss
  tailwindcss: Which plugins would you like to add?
  none
  Which package manager do you want to install dependencies with?

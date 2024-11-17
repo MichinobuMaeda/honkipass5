@@ -1,0 +1,16 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"title": "Honkipass",
+	"password": "Password",
+	"generated": "Generated",
+	"copied": "Copied",
+	"try_again": "Change the settings and try again",
+	"length": "Length: {len}",
+	"std": "Std {len}",
+	"ext": "Ext {len}",
+	"manual": "Manual",
+	"all_types": "Use all character types",
+	"unique_chars": "Don't use the same characters",
+	"excl": "Excl",
+	"excluded_chars": "Excluded characters"
+}
