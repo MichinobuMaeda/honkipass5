@@ -21,17 +21,20 @@ npm start
 ## Note
 
 ```bash
-$ npx sv create honkipass5
- Which template would you like?
- SvelteKit minimal
- Add type checking with Typescript?
- Yes, using Javascript with JSDoc comments
- What would you like to add to your project? (use arrow keys / space bar)
- prettier, eslint, tailwindcss
- tailwindcss: Which plugins would you like to add?
- none
- Which package manager do you want to install dependencies with?
- npm
+$ npm create @vite-pwa/pwa@latest
+
+✔ Project name: … vite-pwa-sample
+✔ Select a framework: › Svelte
+✔ Select a variant: › JavaScript
+✔ PWA Name: … vite-pwa-sample
+✔ PWA Short Name: … vite-pwa-sample
+✔ PWA Description: …
+✔ Theme color: … #4C662B
+✔ Select a strategy: › injectManifest
+✔ Select a behavior: › Prompt for update
+✔ Enable periodic SW updates? … yes
+✔ Show offline ready prompt? … no
+✔ Generate PWA Assets Icons on the fly? … yes
 ```
 
 Copy some svelte components from <https://github.com/MichinobuMaeda/coarse-paper>

@@ -1,13 +1,12 @@
-import { sveltekit } from "@sveltejs/kit/vite";
+import { VitePWA } from "vite-plugin-pwa";
 import { defineConfig } from "vite";
-import { SvelteKitPWA } from "@vite-pwa/sveltekit";
-import { paraglide } from "@inlang/paraglide-sveltekit/vite";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 
+// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    paraglide({ project: "./project.inlang", outdir: "./src/lib/paraglide" }),
-    sveltekit(),
-    SvelteKitPWA({
+    svelte(),
+    VitePWA({
       strategies: "injectManifest",
       srcDir: "src",
       filename: "sw.js",
@@ -20,19 +19,16 @@ export default defineConfig({
       },
 
       manifest: {
-        name: "honkipass5",
-        short_name: "本気でパスワード v5",
-        description: "honkipass5",
-        theme_color: "#63A002",
-        background_color: "#63A002",
+        name: "Honkipass v5",
+        short_name: "honkipass5",
+        description: "",
+        theme_color: "#4C662B",
+        background_color: "#4C662B",
         lang: "ja",
       },
 
       injectManifest: {
-        globPatterns: [
-          "client/**/*.{js,css,ico,png,svg,webp,webmanifest}",
-          "prerendered/**/*.html",
-        ],
+        globPatterns: ["**/*.{js,css,html,svg,png,ico}"],
       },
 
       devOptions: {
@@ -40,10 +36,6 @@ export default defineConfig({
         navigateFallback: "index.html",
         suppressWarnings: true,
         type: "module",
-      },
-
-      kit: {
-        includeVersionFiles: true,
       },
     }),
   ],

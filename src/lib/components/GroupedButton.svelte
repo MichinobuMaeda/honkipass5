@@ -1,5 +1,5 @@
 <script>
-  import SvgCheck from "./SvgCheck.svelte";
+  import SvgCheck from "../icons/SvgCheck.svelte";
 
   /**
    * @typedef {Object} Props

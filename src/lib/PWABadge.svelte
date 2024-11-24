@@ -3,8 +3,9 @@
 
   import { useRegisterSW } from "virtual:pwa-register/svelte";
 
-  // periodic sync is disabled, change the value to enable it, the period is in milliseconds
-  // You can remove onRegisteredSW callback and registerPeriodicSync function
+  import { m } from "./i18n.svelte.js";
+
+  // check for updates every hour
   const period = 60 * 60 * 1000;
 
   /**
@@ -44,10 +45,21 @@
       }
     },
   });
-
-  needRefresh.subscribe((v) => {
-    if (v) {
-      updateServiceWorker(true);
-    }
-  });
 </script>
+
+{#if $needRefresh}
+  <div
+    class="flex justify-center py-0.5
+      bg-lightErrorContainer dark:bg-darkErrorContainer"
+  >
+    <button
+      type="button"
+      class="bg-lightError dark:bg-darkError
+        text-lightOnError dark:text-darkOnError
+        py-0.5 px-4 rounded-full"
+      onclick={() => updateServiceWorker(true)}
+    >
+      {m().updateApp()}
+    </button>
+  </div>
+{/if}
