@@ -15,7 +15,7 @@
 <button
   {id}
   type="button"
-  class={"h-10 rounded-full border px-5 py-1.5 text-base " +
+  class={"px-5 py-1.5 border rounded-full h-10 text-base " +
     "bg-lightSurface dark:bg-darkSurface " +
     "border-lightOutline dark:border-darkOutline " +
     (disabled

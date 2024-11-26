@@ -14,31 +14,31 @@
 <label
   for={id}
   class="relative inline-block h-8 w-14 cursor-pointer rounded-full
-    border-2 border-lightOutline
-    bg-lightSurfaceVariant transition
-    [-webkit-tap-highlight-color:_transparent] has-[:checked]:border-none
-    has-[:checked]:bg-lightPrimary dark:border-darkOutline
-    dark:bg-darkSurfaceVariant has-[:checked]:dark:bg-darkPrimary"
+    bg-lightSurfaceVariant dark:bg-darkSurfaceVariant
+    transition [-webkit-tap-highlight-color:_transparent]
+    has-[:checked]:bg-lightPrimary has-[:checked]:dark:bg-darkPrimary
+    border-2 has-[:checked]:border-none
+    border-lightOutline dark:border-darkOutline"
 >
   <input
     type="checkbox"
     {id}
     bind:checked
-    class="[&:$checked_+_span_svg[data-checked-icon]]:block [&:$checked_+_span_svg[data-unchecked-icon]]:hidden
-      peer
-      sr-only"
+    class="peer sr-only
+      [&:$checked_+_span_svg[data-checked-icon]]:block
+      [&:$checked_+_span_svg[data-unchecked-icon]]:hidden"
   />
 
   <span
-    class="absolute inset-y-0 start-0 z-10 m-1.5
-      inline-flex size-4
-      items-center justify-center
-      rounded-full bg-lightOnSurfaceVariant text-lightOnSurfaceVariant
+    class="absolute inset-y-0 start-0 z-10 inline-flex
+      m-1.5 peer-checked:m-1
+      size-4 peer-checked:size-6
+      items-center justify-center rounded-full
+      bg-lightOnSurfaceVariant dark:bg-darkOnSurfaceVariant
+      text-lightOnSurfaceVariant dark:text-darkOnSurfaceVariant
       transition-all peer-checked:start-6
-      peer-checked:m-1 peer-checked:size-6
-      peer-checked:bg-lightSurface peer-checked:text-lightPrimary
-      dark:bg-darkOnSurfaceVariant dark:text-darkOnSurfaceVariant
-      peer-checked:dark:bg-darkSurface peer-checked:dark:text-darkPrimary"
+      peer-checked:bg-lightSurface peer-checked:dark:bg-darkSurface
+      peer-checked:text-lightPrimary peer-checked:dark:text-darkPrimary"
   >
     <SvgCheck />
   </span>
