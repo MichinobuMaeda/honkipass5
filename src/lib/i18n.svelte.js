@@ -37,12 +37,15 @@ const messages = init();
 
 const honkipassLangKey = "honkipass_lang";
 
+// eslint-disable-next-line no-undef
 let lang = $state(localStorage.getItem(honkipassLangKey) ?? "ja");
 
+// eslint-disable-next-line no-undef
 let langTargetName = $derived(lang === "en" ? "日本語" : "English");
 
 export const langButtonName = () => langTargetName;
 
+// eslint-disable-next-line no-undef
 let localizedMessage = $derived(messages[lang]);
 
 export const m = () => localizedMessage;
