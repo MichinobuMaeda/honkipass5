@@ -5,7 +5,7 @@
    * @typedef {Object} Props
    * @property {string} id
    * @property {Array} items
-   * @property {Object} value
+   * @property {string} value
    */
 
   /** @type {Props} */
@@ -35,7 +35,7 @@
     >
       <span class="flex flex-row gap-0.5">
         {#if value === item.value}
-          <SvgCheck />
+          <span class="w-6 h-6"><SvgCheck /></span>
         {/if}
         {item.label}
       </span>

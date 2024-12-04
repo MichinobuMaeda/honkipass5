@@ -40,6 +40,6 @@
       peer-checked:bg-lightSurface peer-checked:dark:bg-darkSurface
       peer-checked:text-lightPrimary peer-checked:dark:text-darkPrimary"
   >
-    <SvgCheck />
+    <span class="w-6 h-6"><SvgCheck /></span>
   </span>
 </label>

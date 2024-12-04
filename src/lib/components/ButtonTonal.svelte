@@ -27,7 +27,7 @@
   <span class="flex flex-row gap-0.5">
     {#if icon !== null}
       {@const SvgIcon = icon}
-      <SvgIcon />
+      <span class="w-6 h-6"><SvgIcon /></span>
     {/if}
     {label}
   </span>

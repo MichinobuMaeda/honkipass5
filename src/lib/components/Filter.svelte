@@ -5,7 +5,7 @@
    * @typedef {Object} Props
    * @property {string} id
    * @property {string} label
-   * @property {Object} checked
+   * @property {boolean} checked
    * @property {boolean} [disabled]
    */
 
@@ -42,7 +42,7 @@
 >
   <span class="flex flex-row gap-0.5">
     {#if checked}
-      <SvgCheck />
+      <span class="w-6 h-6"><SvgCheck /></span>
     {/if}
     {label}
   </span>
