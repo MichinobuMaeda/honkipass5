@@ -187,7 +187,7 @@ function App() {
             count={lengthList.length - 1}
             value={lengthIndex}
             onChange={(v) => setLengthIndex(v)}
-            width="w-3/4 sm:w-108"
+            width="w-3/5 sm:w-108"
           />
           <div className="flex grow justify-end">
             {t("length", { len: length })}

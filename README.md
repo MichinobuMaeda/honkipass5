@@ -1,29 +1,19 @@
-# Xuan paper
+# Honkipass 5
 
-Tailwind / React / Material design 3
+Password generator
 
-[Sample](https://xuan-paper.michinobu.jp)
-
-## Components
-
-[API](docs/components.md)
-
-![Components](docs/xuan-paper-components.png)
-
-## Color theme generator
-
-![Color theme generator](docs/xuan-paper-color-theme.png)
+[Sample](https://honkipass.michinobu.jp/)
 
 ## Note
 
 ```
 $ npm create @vite-pwa/pwa@latest
 
-✔ Project name: … xuan-paper
+✔ Project name: … honkipass5
 ✔ Select a framework: › React
 ✔ Select a variant: › JavaScript
-✔ PWA Name: … xuan-paper
-✔ PWA Short Name: … xuan-paper
+✔ PWA Name: … honkipass5
+✔ PWA Short Name: … honkipass5
 ✔ PWA Description: …
 ✔ Theme color: … #46B482
 ✔ Select a strategy: › injectManifest
@@ -32,7 +22,7 @@ $ npm create @vite-pwa/pwa@latest
 ✔ Show offline ready prompt? … no / yes
 ✔ Generate PWA Assets Icons on the fly? … no / yes
 
-$ cd xuan-paper
+$ cd honkipass5
 $ npm i
 $ npm i tailwindcss @tailwindcss/vite
 $ npm init @eslint/config@latest
