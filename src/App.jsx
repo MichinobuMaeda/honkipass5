@@ -149,7 +149,7 @@ function App() {
         bottom={<PWABadge />}
       />
       <main
-        className={`flex flex-col py-2 gap-4
+        className={`flex flex-col pt-4 pb-16 gap-4
           w-full sm:max-w-[640px]
           bg-light-form dark:bg-dark-form
           text-light-on-form dark:text-dark-on-form`}
@@ -241,37 +241,31 @@ function App() {
           />
         </Row>
         <Row>
+          <div className="flex flex-row w-full items-center gap-2 sm:gap-4">
+            <div className="flex grow">
+              <TextField
+                value={excludedChars}
+                label={t("excluded chars")}
+                onChange={(v) => setExcludedChars(v)}
+                fontFamily="font-mono"
+                width="max-w-full sm:w-full"
+                disabled={preset !== "m" || !applyExcluded}
+              />
+            </div>
+            <Switch
+              value={applyExcluded}
+              onChange={(v) => setApplyExcluded(v)}
+              disabled={preset !== "m"}
+            />
+          </div>
+        </Row>
+        <Row>
           <span className="flex grow">{t("all types")}</span>
-          <Switch
-            value={allTypes}
-            onChange={(v) => setAllTypes(v)}
-            disabled={preset !== "m"}
-          />
+          <Switch value={allTypes} onChange={(v) => setAllTypes(v)} />
         </Row>
         <Row>
           <span className="flex grow">{t("unique chars")}</span>
-          <Switch
-            value={uniqueChars}
-            onChange={(v) => setUniqueChars(v)}
-            disabled={preset !== "m"}
-          />
-        </Row>
-        <Row>
-          <div className="flex grow">
-            <TextField
-              value={excludedChars}
-              label={t("excluded chars")}
-              onChange={(v) => setExcludedChars(v)}
-              fontFamily="font-mono"
-              width="w-full"
-              disabled={preset !== "m" || !applyExcluded}
-            />
-          </div>
-          <Switch
-            value={applyExcluded}
-            onChange={(v) => setApplyExcluded(v)}
-            disabled={preset !== "m"}
-          />
+          <Switch value={uniqueChars} onChange={(v) => setUniqueChars(v)} />
         </Row>
       </main>
       <Footer />

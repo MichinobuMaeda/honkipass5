@@ -2,7 +2,7 @@ function Footer() {
   return (
     <div
       className={`flex flex-row justify-center-safe fixed bottom-0
-        items-start sm:items-end px-2 pt-2 pb-4 gap-2
+        items-start sm:items-end w-full px-2 pt-2 pb-4 gap-2 text-sm
         bg-light-background dark:bg-dark-background
         text-light-on-background dark:text-dark-on-background`}
     >
