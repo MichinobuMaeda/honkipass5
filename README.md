@@ -4,6 +4,8 @@ Password generator
 
 [Sample](https://honkipass.michinobu.jp/)
 
+![Screen shot: light / dark](docs/honkipass5.png)
+
 ## Note
 
 ```

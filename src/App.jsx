@@ -164,12 +164,16 @@ function App() {
               prefix={
                 <Button
                   icon={<SvgContentCopy />}
-                  style="embed"
+                  style="embedded"
                   onClick={copy}
                 />
               }
               suffix={
-                <Button icon={<SvgRefresh />} style="embed" onClick={refresh} />
+                <Button
+                  icon={<SvgRefresh />}
+                  style="embedded"
+                  onClick={refresh}
+                />
               }
               width="w-full"
               readonly
