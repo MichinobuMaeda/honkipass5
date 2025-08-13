@@ -1,23 +1,32 @@
-import prettier from "eslint-config-prettier";
 import js from "@eslint/js";
-import svelte from "eslint-plugin-svelte";
 import globals from "globals";
+import pluginReact from "eslint-plugin-react";
+import { defineConfig } from "eslint/config";
 
-/** @type {import('eslint').Linter.Config[]} */
-export default [
-  js.configs.recommended,
-  ...svelte.configs["flat/recommended"],
-  prettier,
-  ...svelte.configs["flat/prettier"],
+export default defineConfig([
   {
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        ...globals.node,
-      },
+    ignores: [
+      "**/dist/**",
+      "**/src/sw.js"
+    ],
+  },
+  {
+    files: ["**/*.{js,mjs,cjs,jsx}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: { globals: globals.browser },
+  },
+  {
+    ...pluginReact.configs.flat.recommended,
+    settings: {
+      react: {
+        version: "19.0.0"
+      }
+    }
+  },
+  {
+    rules: {
+      "react/react-in-jsx-scope": "off",
     },
   },
-  {
-    ignores: ["build/", ".svelte-kit/", "dist/"],
-  },
-];
+]);

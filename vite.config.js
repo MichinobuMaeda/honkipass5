@@ -1,11 +1,13 @@
 import { VitePWA } from "vite-plugin-pwa";
 import { defineConfig } from "vite";
-import { svelte } from "@sveltejs/vite-plugin-svelte";
+import tailwindcss from "@tailwindcss/vite";
+import react from "@vitejs/plugin-react";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    svelte(),
+    tailwindcss(),
+    react(),
     VitePWA({
       strategies: "injectManifest",
       srcDir: "src",
@@ -19,12 +21,10 @@ export default defineConfig({
       },
 
       manifest: {
-        name: "Honkipass v5",
-        short_name: "honkipass5",
-        description: "",
-        theme_color: "#4C662B",
-        background_color: "#4C662B",
-        lang: "ja",
+        name: "Honkipass 5",
+        short_name: "Honkipass 5",
+        description: "Honkipass 5",
+        theme_color: "#769c61",
       },
 
       injectManifest: {

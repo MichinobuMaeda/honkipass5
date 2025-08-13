@@ -1,40 +1,55 @@
-# Honkipass v5
+# Xuan paper
 
-Sample: https://honkipass.michinobu.jp/
+Tailwind / React / Material design 3
 
-![本気でパスワード v5](honkipass5.png)
+[Sample](https://xuan-paper.michinobu.jp)
 
-## Prerequisites
+## Components
 
--   node >= 20
+[API](docs/components.md)
 
-## Build
+![Components](docs/xuan-paper-components.png)
 
-```bash
-git clone git@github.com:MichinobuMaeda/honkipass5.git
-cd honkipass5
-npm install
-npm run build
-npm start
-```
+## Color theme generator
+
+![Color theme generator](docs/xuan-paper-color-theme.png)
 
 ## Note
 
-```bash
+```
 $ npm create @vite-pwa/pwa@latest
 
-✔ Project name: … vite-pwa-sample
-✔ Select a framework: › Svelte
+✔ Project name: … xuan-paper
+✔ Select a framework: › React
 ✔ Select a variant: › JavaScript
-✔ PWA Name: … vite-pwa-sample
-✔ PWA Short Name: … vite-pwa-sample
+✔ PWA Name: … xuan-paper
+✔ PWA Short Name: … xuan-paper
 ✔ PWA Description: …
-✔ Theme color: … #4C662B
+✔ Theme color: … #46B482
 ✔ Select a strategy: › injectManifest
 ✔ Select a behavior: › Prompt for update
-✔ Enable periodic SW updates? … yes
-✔ Show offline ready prompt? … no
-✔ Generate PWA Assets Icons on the fly? … yes
-```
+✔ Enable periodic SW updates? … no / yes
+✔ Show offline ready prompt? … no / yes
+✔ Generate PWA Assets Icons on the fly? … no / yes
 
-Copy some svelte components from <https://github.com/MichinobuMaeda/coarse-paper>
+$ cd xuan-paper
+$ npm i
+$ npm i tailwindcss @tailwindcss/vite
+$ npm init @eslint/config@latest
+
+✔ What do you want to lint? · javascript
+✔ How would you like to use ESLint? · problems
+✔ What type of modules does your project use? · esm
+✔ Which framework does your project use? · react
+✔ Does your project use TypeScript? · No / Yes
+✔ Where does your code run? · browser
+✔ Would you like to install them now? · No / Yes
+✔ Which package manager do you want to use? · npm
+
+$ $ npm i prop-types
+$ npm i -D --save-exact prettier
+$ node --eval "fs.writeFileSync('.prettierrc','{}\n')"
+$ node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"
+
+$ npm i react-i18next i18next
+```
