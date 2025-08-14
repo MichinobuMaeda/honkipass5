@@ -85,11 +85,11 @@ const generateCandidate = (param, chars) => {
  */
 const validatePassword = (param, password) =>
   password.length === param.length &&
-  (!param.useAllTypes ||
-    ((!param.useUpperCase || /[A-Z]/.test(password)) &&
-      (!param.useLowerCase || /[a-z]/.test(password)) &&
-      (!param.useNumerics || /[0-9]/.test(password)) &&
-      (!param.useSymbols || /[^A-Za-z0-9]/.test(password)))) &&
+  (!param.allTypes ||
+    ((!param.upperCase || /[A-Z]/.test(password)) &&
+      (!param.lowerCase || /[a-z]/.test(password)) &&
+      (!param.numerics || /[0-9]/.test(password)) &&
+      (!param.symbols || /[^A-Za-z0-9]/.test(password)))) &&
   (!param.uniqueChars ||
     password.split("").every((c, i, all) => !all.slice(i + 1).includes(c)));
 
