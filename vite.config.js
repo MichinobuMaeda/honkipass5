@@ -24,7 +24,7 @@ export default defineConfig({
         name: "Honkipass 5",
         short_name: "Honkipass 5",
         description: "Honkipass 5",
-        theme_color: "#769c61",
+        theme_color: "#969647",
       },
 
       injectManifest: {
