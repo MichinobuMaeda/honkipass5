@@ -14,6 +14,7 @@ import SvgRefresh from "./icons/SvgRefresh.jsx";
 import SvgResetSettings from "./icons/SvgResetSettings.jsx";
 
 import ToggleLanguageButton from "./layout/ToggleLanguageButton.jsx";
+import ToggleDarkModeButton from "./layout/ToggleDarkModeButton.jsx";
 import Header from "./layout/Header.jsx";
 import Footer from "./layout/Footer.jsx";
 import Row from "./layout/Row.jsx";
@@ -145,7 +146,12 @@ function App() {
     <div className="flex flex-col items-center">
       <Header
         title={t("app title")}
-        suffix={<ToggleLanguageButton />}
+        suffix={
+          <div className="flex flex-row gap-4 items-center ">
+            <ToggleLanguageButton />
+            <ToggleDarkModeButton />
+          </div>
+        }
         bottom={<PWABadge />}
       />
       <main
