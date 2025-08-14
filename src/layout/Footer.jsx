@@ -6,7 +6,7 @@ function Footer() {
         bg-light-background dark:bg-dark-background
         text-light-on-background dark:text-dark-on-background`}
     >
-      © 2024-2005 Michinobu Maeda
+      © 2024-2025 Michinobu Maeda
       <a
         className={`mx-2 underline underline-offset-2
           text-light-link dark:text-dark-link`}
