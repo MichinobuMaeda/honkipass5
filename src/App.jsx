@@ -155,15 +155,17 @@ function App() {
         bottom={<PWABadge />}
       />
       <main
-        className={`flex flex-col pt-4 pb-16 gap-4
+        className={`flex flex-col pb-16 gap-4
           w-full sm:max-w-[640px]
           bg-light-form dark:bg-dark-form
           text-light-on-form dark:text-dark-on-form`}
       >
-        <div className="flex flex-row px-4 gap-4 items-start">
-          <div className="flex flex-row grow">
+        <div
+          className={`flex flex-row
+                bg-light-secondary-container dark:bg-dark-secondary-container`}
+        >
+          <div className={`flex flex-row pl-4 py-2 grow`}>
             <TextField
-              label={t("password")}
               value={password}
               message={message}
               fontFamily="font-mono"
@@ -185,12 +187,31 @@ function App() {
               readonly
             />
           </div>
-          <Button
-            icon={<SvgResetSettings />}
-            onClick={reset}
-            disabled={!changed}
-            style="outlined"
-          />
+          <div
+            className={`flex flex-row items-center
+             bg-light-form dark:bg-dark-form`}
+          >
+            <div
+              className={`flex h-full px-2 rounded-br-xl
+                bg-light-secondary-container dark:bg-dark-secondary-container`}
+            ></div>
+            <div
+              className={`flex h-full pt-4
+                bg-light-secondary-container dark:bg-dark-secondary-container`}
+            >
+              <div
+                className={`flex flex-row px-4 sm:px-8 items-center rounded-tl-xl
+                bg-light-form dark:bg-dark-form`}
+              >
+                <Button
+                  icon={<SvgResetSettings />}
+                  onClick={reset}
+                  disabled={!changed}
+                  style="outlined"
+                />
+              </div>
+            </div>
+          </div>
         </div>
         <Row>
           <Slider
@@ -247,23 +268,19 @@ function App() {
           />
         </Row>
         <Row>
-          <div className="flex flex-row w-full items-center gap-2 sm:gap-4">
-            <div className="flex grow">
-              <TextField
-                value={excludedChars}
-                label={t("excluded chars")}
-                onChange={(v) => setExcludedChars(v)}
-                fontFamily="font-mono"
-                width="max-w-full sm:w-full"
-                disabled={preset !== "m" || !applyExcluded}
-              />
-            </div>
-            <Switch
-              value={applyExcluded}
-              onChange={(v) => setApplyExcluded(v)}
-              disabled={preset !== "m"}
-            />
-          </div>
+          <TextField
+            value={excludedChars}
+            label={t("excluded chars")}
+            onChange={(v) => setExcludedChars(v)}
+            fontFamily="font-mono"
+            width="grow"
+            disabled={preset !== "m" || !applyExcluded}
+          />
+          <Switch
+            value={applyExcluded}
+            onChange={(v) => setApplyExcluded(v)}
+            disabled={preset !== "m"}
+          />
         </Row>
         <Row>
           <span className="flex grow">{t("all types")}</span>
