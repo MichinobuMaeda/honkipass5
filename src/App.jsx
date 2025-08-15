@@ -31,7 +31,7 @@ function App() {
   const { t } = useTranslation();
 
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState(t("generated"));
+  const [message, setMessage] = useState("generated");
 
   const lengthList = [6, 8, 10, 12, 16, 20, 24, 30, 36, 48, 64, 128];
   const [lengthIndex, setLengthIndex] = useState(1);
@@ -116,16 +116,16 @@ function App() {
   );
 
   const refresh = () => {
-    setMessage(t("please wait"));
+    setMessage("please wait");
     const generated = generatePassword(params, chars);
     if (generated) {
       setPassword(generated);
       setTimeout(() => {
-        setMessage(t("generated"));
+        setMessage("generated");
       }, 100);
     } else {
       setTimeout(() => {
-        setMessage(t("try again"));
+        setMessage("try again");
       }, 100);
     }
   };
@@ -136,9 +136,9 @@ function App() {
 
   const copy = () => {
     navigator.clipboard.writeText(password);
-    setMessage(t("please wait"));
+    setMessage("please wait");
     setTimeout(() => {
-      setMessage(t("copied"));
+      setMessage("copied");
     }, 100);
   };
 
@@ -167,7 +167,7 @@ function App() {
           <div className={`flex flex-row pl-4 py-2 grow`}>
             <TextField
               value={password}
-              message={message}
+              message={t(message)}
               fontFamily="font-mono"
               prefix={
                 <Button
