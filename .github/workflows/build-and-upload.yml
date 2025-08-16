@@ -26,10 +26,12 @@ jobs:
         run: npm run build
 
       - name: Create archive file
-        run: tar czvf honkipass5.tar.gz *
+        run: |
+          cd dist
+          zip -r honkipass5.zip *
 
       - name: Upload dist as artifact
         uses: actions/upload-artifact@v4
         with:
           name: honkipass5
-          path: dist/honkipass5.tar.gz
+          path: dist/honkipass5.zip
