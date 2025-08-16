@@ -154,7 +154,7 @@ function App() {
         }
         bottom={<PWABadge />}
       />
-      <main className={`flex flex-col w-full sm:max-w-[640px] px-2`}>
+      <main className={`flex flex-col w-full sm:max-w-[640px] px-2 pb-14`}>
         <div
           className={`flex flex-row
            bg-light-form dark:bg-dark--form`}
