@@ -154,17 +154,15 @@ function App() {
         }
         bottom={<PWABadge />}
       />
-      <main
-        className={`flex flex-col pb-16 gap-4
-          w-full sm:max-w-[640px]
-          bg-light-form dark:bg-dark-form
-          text-light-on-form dark:text-dark-on-form`}
-      >
-        <div className={`flex flex-row`}>
+      <main className={`flex flex-col w-full sm:max-w-[640px] px-2`}>
+        <div
+          className={`flex flex-row
+           bg-light-form dark:bg-dark--form`}
+        >
           <div
             className={`flex flex-row pl-3 sm:pl-4 pr-4 sm:pr-6 py-1 grow
-              rounded-br-2xl
-            bg-light-secondary-container dark:bg-dark-secondary-container`}
+              rounded-br-4xl
+            bg-light-background dark:bg-dark-background`}
           >
             <TextField
               value={password}
@@ -190,10 +188,10 @@ function App() {
           </div>
           <div
             className={`flex flex-row pt-3
-                bg-light-secondary-container dark:bg-dark-secondary-container`}
+                bg-light-background dark:bg-dark-background`}
           >
             <div
-              className={`flex flex-row px-4 sm:px-6 items-center rounded-tl-4xl
+              className={`flex flex-row px-4 sm:px-6 items-center rounded-t-4xl
                 bg-light-form dark:bg-dark-form`}
             >
               <Button
@@ -205,83 +203,90 @@ function App() {
             </div>
           </div>
         </div>
-        <Row>
-          <Slider
-            count={lengthList.length - 1}
-            value={lengthIndex}
-            onChange={(v) => setLengthIndex(v)}
-            width="w-3/5 sm:w-108"
-          />
-          <div className="flex grow justify-end">
-            {t("length", { len: length })}
-          </div>
-        </Row>
-        <Row>
-          <div className="flex flex-wrap font-mono">
-            {charSetAll.split("").map((c) => (
-              <span
-                key={c}
-                className={`px-0.5 ${
-                  chars.includes(c)
-                    ? password.includes(c)
-                      ? `bg-light-tertiary-container dark:bg-dark-tertiary-container
+        <div
+          className={`flex flex-col sm:px-2 pt-4 pb-8 gap-4
+            rounded-tl-4xl rounded-b-4xl
+            bg-light-form dark:bg-dark-form
+            text-light-on-form dark:text-dark-on-form`}
+        >
+          <Row>
+            <div className="flex flex-wrap font-mono">
+              {charSetAll.split("").map((c) => (
+                <span
+                  key={c}
+                  className={`px-0.5 ${
+                    chars.includes(c)
+                      ? password.includes(c)
+                        ? `bg-light-tertiary-container dark:bg-dark-tertiary-container
                         text-light-tertiary dark:text-dark-tertiary`
-                      : "text-light-on-form dark:text-dark-on-form"
-                    : `bg-light-surface-container-high/50 dark:bg-light-surface-container-high/50
+                        : "text-light-on-form dark:text-dark-on-form"
+                      : `bg-light-surface-container-high/50 dark:bg-light-surface-container-high/50
                       text-light-on-surface/30 dark:text-dark-on-surface/30`
-                }`}
-              >
-                {c}
-              </span>
-            ))}
-          </div>
-        </Row>
-        <Row>
-          <ButtonGroup
-            items={presetList}
-            value={preset}
-            onChange={(v) => setPreset(v)}
-          />
-        </Row>
-        <Row>
-          <ButtonGroup
-            items={charTypeList}
-            value={charTypes}
-            onChange={(v) => {
-              const prev = [...charTypes];
-              if (v.length === 0) {
-                setCharTypes(prev);
-              } else {
-                setCharTypes(v);
-              }
-            }}
-            multiSelect
-            disabled={preset !== "m"}
-          />
-        </Row>
-        <Row>
-          <TextField
-            value={excludedChars}
-            label={t("excluded chars")}
-            onChange={(v) => setExcludedChars(v)}
-            fontFamily="font-mono"
-            width="grow"
-            disabled={preset !== "m" || !applyExcluded}
-          />
-          <Switch
-            value={applyExcluded}
-            onChange={(v) => setApplyExcluded(v)}
-            disabled={preset !== "m"}
-          />
-        </Row>
-        <Row>
-          <span className="flex grow">{t("all types")}</span>
-          <Switch value={allTypes} onChange={(v) => setAllTypes(v)} />
-        </Row>
-        <Row>
-          <span className="flex grow">{t("unique chars")}</span>
-          <Switch value={uniqueChars} onChange={(v) => setUniqueChars(v)} />
-        </Row>
+                  }`}
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+          </Row>
+          <Row>
+            <Slider
+              count={lengthList.length - 1}
+              value={lengthIndex}
+              onChange={(v) => setLengthIndex(v)}
+              width="w-3/5 sm:w-108"
+            />
+            <div className="flex grow justify-end">
+              {t("length", { len: length })}
+            </div>
+          </Row>
+          <Row>
+            <ButtonGroup
+              items={presetList}
+              value={preset}
+              onChange={(v) => setPreset(v)}
+            />
+          </Row>
+          <Row>
+            <ButtonGroup
+              items={charTypeList}
+              value={charTypes}
+              onChange={(v) => {
+                const prev = [...charTypes];
+                if (v.length === 0) {
+                  setCharTypes(prev);
+                } else {
+                  setCharTypes(v);
+                }
+              }}
+              multiSelect
+              disabled={preset !== "m"}
+            />
+          </Row>
+          <Row>
+            <TextField
+              value={excludedChars}
+              label={t("excluded chars")}
+              onChange={(v) => setExcludedChars(v)}
+              fontFamily="font-mono"
+              width="grow"
+              disabled={preset !== "m" || !applyExcluded}
+            />
+            <Switch
+              value={applyExcluded}
+              onChange={(v) => setApplyExcluded(v)}
+              disabled={preset !== "m"}
+            />
+          </Row>
+          <Row>
+            <span className="flex grow">{t("all types")}</span>
+            <Switch value={allTypes} onChange={(v) => setAllTypes(v)} />
+          </Row>
+          <Row>
+            <span className="flex grow">{t("unique chars")}</span>
+            <Switch value={uniqueChars} onChange={(v) => setUniqueChars(v)} />
+          </Row>
+        </div>
       </main>
       <Footer />
     </div>
