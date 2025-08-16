@@ -46,7 +46,8 @@
     "timemachine",
     "vercel",
     "vite",
-    "xuan"
+    "xuan",
+    "xzvf"
   ],
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",

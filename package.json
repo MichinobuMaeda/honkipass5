@@ -8,6 +8,7 @@
     "start": "vite --port 8000",
     "build": "vite build",
     "lint": "eslint .",
+    "deploy": "npm run build && cd dist && tar -czvf honkipass5.tar.gz * && mv honkipass5.tar.gz .. && cd .. && scp honkipass5.tar.gz $TARGET_HOME:~/ && ssh $TARGET_HOME tar xzvf honkipass5.tar.gz --cd $TARGET_PATH && rm honkipass5.tar.gz && ssh $TARGET_HOME ls -al $TARGET_PATH",
     "preview": "vite preview"
   },
   "dependencies": {
