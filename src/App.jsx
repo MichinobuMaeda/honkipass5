@@ -160,11 +160,12 @@ function App() {
           bg-light-form dark:bg-dark-form
           text-light-on-form dark:text-dark-on-form`}
       >
-        <div
-          className={`flex flex-row
-                bg-light-secondary-container dark:bg-dark-secondary-container`}
-        >
-          <div className={`flex flex-row pl-4 py-2 grow`}>
+        <div className={`flex flex-row`}>
+          <div
+            className={`flex flex-row pl-3 sm:pl-4 pr-4 sm:pr-6 py-1 grow
+              rounded-br-2xl
+            bg-light-secondary-container dark:bg-dark-secondary-container`}
+          >
             <TextField
               value={password}
               message={t(message)}
@@ -188,28 +189,19 @@ function App() {
             />
           </div>
           <div
-            className={`flex flex-row items-center
-             bg-light-form dark:bg-dark-form`}
+            className={`flex flex-row pt-3
+                bg-light-secondary-container dark:bg-dark-secondary-container`}
           >
             <div
-              className={`flex h-full px-2 rounded-br-xl
-                bg-light-secondary-container dark:bg-dark-secondary-container`}
-            ></div>
-            <div
-              className={`flex h-full pt-4
-                bg-light-secondary-container dark:bg-dark-secondary-container`}
-            >
-              <div
-                className={`flex flex-row px-4 sm:px-8 items-center rounded-tl-xl
+              className={`flex flex-row px-4 sm:px-6 items-center rounded-tl-4xl
                 bg-light-form dark:bg-dark-form`}
-              >
-                <Button
-                  icon={<SvgResetSettings />}
-                  onClick={reset}
-                  disabled={!changed}
-                  style="outlined"
-                />
-              </div>
+            >
+              <Button
+                icon={<SvgResetSettings />}
+                onClick={reset}
+                disabled={!changed}
+                style="outlined"
+              />
             </div>
           </div>
         </div>
