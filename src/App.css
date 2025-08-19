@@ -1,18 +1,16 @@
 @import "tailwindcss";
 @import "./theme.css";
-@custom-variant dark (&:where(.dark, .dark *));
+@import "./xuan-paper/xuan-paper.css";
 
 body {
   @apply text-base
-    bg-light-background dark:bg-dark-background;
+    bg-light-surface-variant dark:bg-dark-surface-variant
+    text-light-on-surface dark:text-dark-on-surface;
 }
 
-h2 {
-  @apply flex px-4 py-1 sm:py-2 text-2xl
-    bg-light-tertiary-container dark:bg-dark-tertiary-container
-    text-light-on-tertiary-container dark:text-dark-on-tertiary-container;
-}
-hr {
-  @apply border-1
-    border-light-outline-variant dark:border-dark-outline-variant;
+footer {
+  @apply flex flex-row justify-center-safe fixed bottom-0
+    items-start sm:items-end w-full px-2 pt-2 pb-4 gap-4 text-sm
+    bg-light-background dark:bg-dark-background
+    text-light-on-background dark:text-dark-on-background;
 }

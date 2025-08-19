@@ -1,23 +1,22 @@
+import PropTypes from "prop-types";
 import { useState, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-
-import "./App.css";
-import PWABadge from "./PWABadge.jsx";
+import AppBar from "./xuan-paper/AppBar.jsx";
+import PWABadge from "./xuan-paper/PWABadge.jsx";
 import Button from "./xuan-paper/Button.jsx";
 import ButtonGroup from "./xuan-paper/ButtonGroup.jsx";
 import TextField from "./xuan-paper/TextField.jsx";
 import Slider from "./xuan-paper/Slider.jsx";
 import Switch from "./xuan-paper/Switch.jsx";
+import ToggleLanguageButton from "./xuan-paper/ToggleLanguageButton.jsx";
+import ToggleDarkModeButton from "./xuan-paper/ToggleDarkModeButton.jsx";
 
 import SvgContentCopy from "./icons/SvgContentCopy.jsx";
 import SvgRefresh from "./icons/SvgRefresh.jsx";
 import SvgResetSettings from "./icons/SvgResetSettings.jsx";
 
-import ToggleLanguageButton from "./layout/ToggleLanguageButton.jsx";
-import ToggleDarkModeButton from "./layout/ToggleDarkModeButton.jsx";
-import Header from "./layout/Header.jsx";
-import Footer from "./layout/Footer.jsx";
-import Row from "./layout/Row.jsx";
+import "./App.css";
+import appLogo from "/favicon.svg";
 import {
   charSetAll,
   charSetStd,
@@ -26,6 +25,23 @@ import {
   generateChars,
   generatePassword,
 } from "./honkipass.js";
+
+const bgColor = "bg-light-surface-variant dark:bg-dark-surface-variant";
+
+const Row = ({ children }) => {
+  return (
+    <div
+      className={`flex flex-wrap px-4 sm:px-8 gap-4 sm:gap-8
+        justify-start items-center`}
+    >
+      {children}
+    </div>
+  );
+};
+
+Row.propTypes = {
+  children: PropTypes.node,
+};
 
 function App() {
   const { t } = useTranslation();
@@ -142,27 +158,55 @@ function App() {
     }, 100);
   };
 
+  const CharMap = () => (
+    <div className="flex flex-wrap font-mono">
+      {charSetAll.split("").map((c) => (
+        <span
+          key={c}
+          className={`px-0.5 ${
+            chars.includes(c)
+              ? password.includes(c)
+                ? `bg-light-tertiary-container dark:bg-dark-tertiary-container
+                text-light-tertiary dark:text-dark-tertiary`
+                : "text-light-on-form dark:text-dark-on-form"
+              : `bg-light-surface-container-high/50 dark:bg-dark-surface-container-high/50
+              text-light-on-surface/30 dark:text-dark-on-surface/30`
+          }`}
+        >
+          {c}
+        </span>
+      ))}
+    </div>
+  );
+
   return (
     <div className="flex flex-col items-center">
-      <Header
-        title={t("app title")}
-        suffix={
-          <div className="flex flex-row gap-4 items-center ">
-            <ToggleLanguageButton />
-            <ToggleDarkModeButton />
-          </div>
+      <AppBar
+        appLogo={
+          <img
+            src={appLogo}
+            className="size-8 min-w-8"
+            alt={`${t("app title")} logo`}
+          />
         }
-        bottom={<PWABadge />}
+        appName={t("app title")}
+        suffix={[
+          <ToggleLanguageButton key="language-toggle" />,
+          <ToggleDarkModeButton key="dark-mode-toggle" />,
+        ]}
+        optionalClass="fixed top-0 w-full h-10 z-20"
       />
-      <main className={`flex flex-col w-full sm:max-w-[640px] px-2 pb-14`}>
+      <main
+        className={`flex flex-col w-full sm:max-w-[640px] px-2 pb-14 pt-12`}
+      >
+        <PWABadge />
         <div
           className={`flex flex-row
-           bg-light-form dark:bg-dark--form`}
+           bg-light-form dark:bg-dark-form`}
         >
           <div
             className={`flex flex-row pl-3 sm:pl-4 pr-4 sm:pr-6 py-1 grow
-              rounded-br-4xl
-            bg-light-background dark:bg-dark-background`}
+              rounded-br-4xl ${bgColor}`}
           >
             <TextField
               value={password}
@@ -186,10 +230,7 @@ function App() {
               readonly
             />
           </div>
-          <div
-            className={`flex flex-row pt-3
-                bg-light-background dark:bg-dark-background`}
-          >
+          <div className={`flex flex-row pt-3 ${bgColor}`}>
             <div
               className={`flex flex-row px-4 sm:px-6 items-center rounded-t-4xl
                 bg-light-form dark:bg-dark-form`}
@@ -210,24 +251,7 @@ function App() {
             text-light-on-form dark:text-dark-on-form`}
         >
           <Row>
-            <div className="flex flex-wrap font-mono">
-              {charSetAll.split("").map((c) => (
-                <span
-                  key={c}
-                  className={`px-0.5 ${
-                    chars.includes(c)
-                      ? password.includes(c)
-                        ? `bg-light-tertiary-container dark:bg-dark-tertiary-container
-                        text-light-tertiary dark:text-dark-tertiary`
-                        : "text-light-on-form dark:text-dark-on-form"
-                      : `bg-light-surface-container-high/50 dark:bg-light-surface-container-high/50
-                      text-light-on-surface/30 dark:text-dark-on-surface/30`
-                  }`}
-                >
-                  {c}
-                </span>
-              ))}
-            </div>
+            <CharMap />
           </Row>
           <Row>
             <Slider
@@ -288,7 +312,10 @@ function App() {
           </Row>
         </div>
       </main>
-      <Footer />
+      <footer>
+        © 2024-2025 Michinobu Maeda
+        <a href="https://github.com/MichinobuMaeda/honkipass5">GitHub</a>
+      </footer>
     </div>
   );
 }
