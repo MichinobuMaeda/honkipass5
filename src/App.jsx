@@ -43,6 +43,28 @@ Row.propTypes = {
   children: PropTypes.node,
 };
 
+const Char = ({ chr, disabled, used }) => (
+  <span
+    className={`px-0.5 ${
+      disabled
+        ? `bg-light-surface-container-high/50 dark:bg-dark-surface-container-high/50
+              text-light-on-surface/30 dark:text-dark-on-surface/30`
+        : used
+          ? `bg-light-tertiary-container dark:bg-dark-tertiary-container
+                text-light-tertiary dark:text-dark-tertiary`
+          : "text-light-on-form dark:text-dark-on-form"
+    }`}
+  >
+    {chr}
+  </span>
+);
+
+Char.propTypes = {
+  chr: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  used: PropTypes.bool.isRequired,
+};
+
 function App() {
   const { t } = useTranslation();
 
@@ -158,27 +180,6 @@ function App() {
     }, 100);
   };
 
-  const CharMap = () => (
-    <div className="flex flex-wrap font-mono">
-      {charSetAll.split("").map((c) => (
-        <span
-          key={c}
-          className={`px-0.5 ${
-            chars.includes(c)
-              ? password.includes(c)
-                ? `bg-light-tertiary-container dark:bg-dark-tertiary-container
-                text-light-tertiary dark:text-dark-tertiary`
-                : "text-light-on-form dark:text-dark-on-form"
-              : `bg-light-surface-container-high/50 dark:bg-dark-surface-container-high/50
-              text-light-on-surface/30 dark:text-dark-on-surface/30`
-          }`}
-        >
-          {c}
-        </span>
-      ))}
-    </div>
-  );
-
   return (
     <div className="flex flex-col items-center">
       <AppBar
@@ -194,7 +195,7 @@ function App() {
           <ToggleLanguageButton key="language-toggle" />,
           <ToggleDarkModeButton key="dark-mode-toggle" />,
         ]}
-        optionalClass="fixed top-0 w-full h-10 z-20"
+        height={10}
       />
       <main
         className={`flex flex-col w-full sm:max-w-[640px] px-2 pb-14 pt-12`}
@@ -205,7 +206,7 @@ function App() {
            bg-light-form dark:bg-dark-form`}
         >
           <div
-            className={`flex flex-row pl-3 sm:pl-4 pr-4 sm:pr-6 py-1 grow
+            className={`flex flex-row pl-2 pr-4 sm:pr-6 py-1 grow
               rounded-br-4xl ${bgColor}`}
           >
             <TextField
@@ -251,7 +252,16 @@ function App() {
             text-light-on-form dark:text-dark-on-form`}
         >
           <Row>
-            <CharMap />
+            <div className="flex flex-wrap font-mono">
+              {charSetAll.split("").map((c) => (
+                <Char
+                  key={c}
+                  chr={c}
+                  disabled={!chars.includes(c)}
+                  used={password.includes(c)}
+                />
+              ))}
+            </div>
           </Row>
           <Row>
             <Slider
