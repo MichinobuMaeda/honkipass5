@@ -195,7 +195,7 @@ function App() {
           <ToggleLanguageButton key="language-toggle" />,
           <ToggleDarkModeButton key="dark-mode-toggle" />,
         ]}
-        height={10}
+        height="h-10"
       />
       <main
         className={`flex flex-col w-full sm:max-w-[640px] px-2 pb-14 pt-12`}
