@@ -17,6 +17,7 @@ import SvgResetSettings from "./icons/SvgResetSettings.jsx";
 
 import "./App.css";
 import appLogo from "/favicon.svg";
+import version from "./version.js";
 import {
   charSetAll,
   charSetStd,
@@ -323,8 +324,9 @@ function App() {
         </div>
       </main>
       <footer>
-        © 2024-2025 Michinobu Maeda
+        © 2024, 2025 Michinobu Maeda
         <a href="https://github.com/MichinobuMaeda/honkipass5">GitHub</a>
+        {version}
       </footer>
     </div>
   );
