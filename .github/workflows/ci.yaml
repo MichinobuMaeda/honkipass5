@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+    tags:
+      - "v*.*.*"
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".nvmrc"
+          cache: "npm"
+      - run: npm ci
+      - run: npm run lint
+      # - run: npm run test
+
+      - name: Build
+        run: npm run build
+        if: github.ref_type == 'tag'
+
+      - name: Archive
+        run: zip -r honkipass5_${{ github.ref_name }}.zip dist src/honkipass5 tools
+        if: github.ref_type == 'tag'
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
+        with:
+          files: honkipass5_${{ github.ref_name }}.zip

@@ -66,6 +66,10 @@ Char.propTypes = {
   used: PropTypes.bool.isRequired,
 };
 
+/**
+ * Main application component for Honkipass password generator.
+ * @returns {JSX.Element} The application component.
+ */
 function App() {
   const { t } = useTranslation();
 

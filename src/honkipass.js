@@ -1,17 +1,17 @@
 const maxTryCount = 1000;
 
 /**
- * @typedef {Object} Param
- * @property {number} length
- * @property {string} preset
- * @property {boolean} lowerCase
- * @property {boolean} upperCase
- * @property {boolean} numerics
- * @property {boolean} symbols
- * @property {boolean} allTypes
- * @property {boolean} uniqueChars
- * @property {boolean} applyExcluded
- * @property {string} excludedChars
+ * @typedef {object} Param
+ * @property {number} length - Password length.
+ * @property {string} preset - Character set preset (s, e, m).
+ * @property {boolean} lowerCase - Include lowercase letters.
+ * @property {boolean} upperCase - Include uppercase letters.
+ * @property {boolean} numerics - Include numeric characters.
+ * @property {boolean} symbols - Include symbol characters.
+ * @property {boolean} allTypes - Require all selected character types.
+ * @property {boolean} uniqueChars - Require unique characters only.
+ * @property {boolean} applyExcluded - Apply character exclusion.
+ * @property {string} excludedChars - Characters to exclude.
  */
 
 export const charSetAll =
@@ -30,8 +30,8 @@ export const defaultExcludedChars = "Il10O8B3Egqvu!|[]{}";
 
 /**
  * Generate character set for password
- * @param {Param} param
- * @returns {string}
+ * @param {Param} param - Parameters for character set generation.
+ * @returns {string} Generated character set.
  */
 export const generateChars = (param) => {
   let ret;
@@ -68,8 +68,9 @@ export const generateChars = (param) => {
 
 /**
  * Generate candidate
- * @param {object} param
- * @returns {string}
+ * @param {Param} param - Parameters for password generation.
+ * @param {string} chars - Available character set.
+ * @returns {string} Generated candidate password.
  */
 const generateCandidate = (param, chars) => {
   const buff = new Uint32Array(param.length);
@@ -79,9 +80,9 @@ const generateCandidate = (param, chars) => {
 
 /**
  * Validate password
- * @param {object} param
- * @param {string} password
- * @returns {boolean}
+ * @param {Param} param - Parameters for validation.
+ * @param {string} password - Password to validate.
+ * @returns {boolean} True if password meets criteria.
  */
 const validatePassword = (param, password) =>
   password.length === param.length &&
@@ -95,8 +96,9 @@ const validatePassword = (param, password) =>
 
 /**
  * Generate password
- * @param {object} param
- * @returns {string}
+ * @param {Param} param - Parameters for password generation.
+ * @param {string} chars - Available character set.
+ * @returns {string} Generated password or empty string if failed.
  */
 export const generatePassword = (param, chars) => {
   for (let i = 0; i < maxTryCount; ++i) {
