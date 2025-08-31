@@ -27,6 +27,19 @@ jobs:
         run: npm run build
         if: github.ref_type == 'tag'
 
+      - name: Prepare publish
+        run: |
+          cp -r dist/* ./docs/ && \
+          sed -i -e 's/="\//="\/honkipass5\//g' docs/index.html && \
+          sed -i -e 's/:\s*"\//:"\/honkipass5\//g' docs/manifest.webmanifest
+        if: github.ref_type == 'tag'
+
+      - name: Publish
+        uses: stefanzweifel/git-auto-commit-action@v6
+        with:
+          commit_message: "Publish sample"
+          branch: main
+        if: github.ref_type == 'tag'
       - name: Archive
         run: zip -r honkipass5_${{ github.ref_name }}.zip dist
         if: github.ref_type == 'tag'

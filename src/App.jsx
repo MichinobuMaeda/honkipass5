@@ -16,7 +16,7 @@ import SvgRefresh from "./icons/SvgRefresh.jsx";
 import SvgResetSettings from "./icons/SvgResetSettings.jsx";
 
 import "./App.css";
-import appLogo from "/favicon.svg";
+import appLogo from "./assets/images/favicon.svg";
 import version from "./version.js";
 import {
   charSetAll,

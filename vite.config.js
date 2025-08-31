@@ -43,6 +43,8 @@ export default defineConfig({
         suppressWarnings: true,
         type: "module",
       },
+
+      includeAssets: ["src/assets/images/*.{svg,png,jpg,jpeg}"],
     }),
   ],
 });
