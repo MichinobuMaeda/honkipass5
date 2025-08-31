@@ -2,7 +2,7 @@
 
 Password generator
 
-[Sample](https://honkipass.michinobu.jp/)
+[Sample](https://pages.michinobu.jp/honkipass5)
 
 ![Screen shot: light / dark](docs/honkipass5.png)
 
