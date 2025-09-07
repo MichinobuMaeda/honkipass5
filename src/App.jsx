@@ -188,19 +188,12 @@ function App() {
   return (
     <div className="flex flex-col items-center">
       <AppBar
-        appLogo={
-          <img
-            src={appLogo}
-            className="size-8 min-w-8"
-            alt={`${t("app title")} logo`}
-          />
-        }
+        appLogo={<img src={appLogo} alt={`${t("app title")} logo`} />}
         appName={t("app title")}
         suffix={[
           <ToggleLanguageButton key="language-toggle" />,
           <ToggleDarkModeButton key="dark-mode-toggle" />,
         ]}
-        height="h-10"
       />
       <main
         className={`flex flex-col w-full sm:max-w-[640px] px-2 pb-14 pt-12`}
