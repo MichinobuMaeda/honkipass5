@@ -1,7 +1,7 @@
 {
   "name": "honkipass5",
   "private": true,
-  "version": "2.2.3",
+  "version": "2.2.4",
   "type": "module",
   "license": "MIT",
   "scripts": {
@@ -13,9 +13,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@michinobumaeda/xuan-paper": "github:MichinobuMaeda/xuan-paper#v1.0.0",
     "i18next": "^25.5.2",
-    "react-i18next": "^15.7.3",
-    "xuan-paper": "git://github.com/MichinobuMaeda/xuan-paper.git#v1.0.2"
+    "react-i18next": "^15.7.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",

@@ -11,7 +11,7 @@ import {
   Switch,
   ToggleLanguageButton,
   ToggleDarkModeButton,
-} from "xuan-paper";
+} from "@michinobumaeda/xuan-paper";
 import { useRegisterSW } from "virtual:pwa-register/react";
 import { resources } from "../src/i18n.js";
 
