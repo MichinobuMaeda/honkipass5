@@ -1,15 +1,19 @@
 import PropTypes from "prop-types";
 import { useState, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import AppBar from "./xuan-paper/AppBar.jsx";
-import PWABadge from "./xuan-paper/PWABadge.jsx";
-import Button from "./xuan-paper/Button.jsx";
-import ButtonGroup from "./xuan-paper/ButtonGroup.jsx";
-import TextField from "./xuan-paper/TextField.jsx";
-import Slider from "./xuan-paper/Slider.jsx";
-import Switch from "./xuan-paper/Switch.jsx";
-import ToggleLanguageButton from "./xuan-paper/ToggleLanguageButton.jsx";
-import ToggleDarkModeButton from "./xuan-paper/ToggleDarkModeButton.jsx";
+import {
+  AppBar,
+  PWABadge,
+  Button,
+  ButtonGroup,
+  TextField,
+  Slider,
+  Switch,
+  ToggleLanguageButton,
+  ToggleDarkModeButton,
+} from "xuan-paper";
+import { useRegisterSW } from "virtual:pwa-register/react";
+import { resources } from "../src/i18n.js";
 
 import SvgContentCopy from "./icons/SvgContentCopy.jsx";
 import SvgRefresh from "./icons/SvgRefresh.jsx";
@@ -17,7 +21,7 @@ import SvgResetSettings from "./icons/SvgResetSettings.jsx";
 
 import "./App.css";
 import appLogo from "./assets/images/favicon.svg";
-import version from "./version.js";
+import { version } from "../package.json";
 import {
   charSetAll,
   charSetStd,
@@ -71,7 +75,7 @@ Char.propTypes = {
  * @returns {JSX.Element} The application component.
  */
 function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("generated");
@@ -191,14 +195,23 @@ function App() {
         appLogo={<img src={appLogo} alt={`${t("app title")} logo`} />}
         appName={t("app title")}
         suffix={[
-          <ToggleLanguageButton key="language-toggle" />,
+          <ToggleLanguageButton
+            key="language-toggle"
+            langs={resources}
+            lang={i18n.language}
+            setLang={i18n.changeLanguage}
+          />,
           <ToggleDarkModeButton key="dark-mode-toggle" />,
         ]}
       />
       <main
         className={`flex flex-col w-full sm:max-w-[640px] px-2 pb-14 pt-12`}
       >
-        <PWABadge />
+        <PWABadge
+          useRegisterSW={useRegisterSW}
+          needRefreshMessage={t("need refresh")}
+          offlineReadyMessage={t("offline ready")}
+        />
         <div
           className={`flex flex-row
            bg-light-form dark:bg-dark-form`}
