@@ -1,24 +1,21 @@
 {
   "name": "honkipass5",
   "private": true,
-  "version": "2.2.1",
+  "version": "2.2.2",
   "type": "module",
   "license": "MIT",
   "scripts": {
     "start": "vite --port 8000",
     "build": "vite build",
     "lint": "eslint .",
-    "deploy": "npm run build && cd dist && tar -czvf honkipass5.tar.gz * && mv honkipass5.tar.gz .. && cd .. && scp honkipass5.tar.gz $TARGET_HOME:~/ && ssh $TARGET_HOME tar xzvf honkipass5.tar.gz --cd $TARGET_PATH && rm honkipass5.tar.gz && ssh $TARGET_HOME ls -al $TARGET_PATH",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.11",
-    "i18next": "^25.3.4",
-    "prop-types": "^15.8.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-i18next": "^15.6.1",
-    "tailwindcss": "^4.1.11"
+    "i18next": "^25.5.2",
+    "react-i18next": "^15.7.3",
+    "xuan-paper": "git://github.com/MichinobuMaeda/xuan-paper.git#v1.0.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
