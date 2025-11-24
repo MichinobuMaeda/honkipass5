@@ -2,7 +2,7 @@
   --content-max-width: 480px;
   --header-height: 3rem;
   --result-area-height: 5rem;
-  --footer-height: 2rem;
+  --footer-min-height: 2rem;
   --monospace-font-family: "Lucida Console", Courier, monospace;
 }
 
@@ -78,19 +78,19 @@ main {
   width: 100vw;
   min-height: calc(
     100vh - var(--header-height) - var(--result-area-height) -
-      var(--footer-height)
+      var(--footer-min-height) - env(safe-area-inset-bottom, 0)
   );
   margin: 0;
   padding: 0.25rem 0.5rem 0.5rem 0.5rem;
   background-color: light-dark(var(--color-light-form), var(--color-dark-form));
 }
 
-#char-map {
+div:has(> #char-map) {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
-  font-family: var(--monospace-font-family);
-  max-width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   background-color: light-dark(
     var(--color-light-surface-variant),
     var(--color-dark-surface-variant)
@@ -101,6 +101,14 @@ main {
       var(--color-light-surface-variant),
       var(--color-dark-surface-variant)
     );
+  padding: 0 0.25rem;
+}
+
+#char-map {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  font-family: var(--monospace-font-family);
 }
 
 #char-map span {
@@ -139,14 +147,14 @@ main {
 
 footer {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   justify-content: center;
   align-items: center;
-  height: var(--footer-height);
   margin: 0;
   padding: 0 0.5rem env(safe-area-inset-bottom, 0) 0.5rem;
-  gap: 1rem;
+  min-height: var(--footer-min-height);
   width: 100vw;
+  gap: 0 0.5rem;
   color: light-dark(
     var(--color-light-on-surface-variant),
     var(--color-dark-on-surface-variant)
@@ -155,6 +163,8 @@ footer {
     var(--color-light-surface-container),
     var(--color-dark-surface-container)
   );
+  font-size: 0.875rem;
+  line-height: 1.75rem;
 }
 
 footer > a:not([class]) {
