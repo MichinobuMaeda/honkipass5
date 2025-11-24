@@ -1,92 +1,23 @@
 import js from "@eslint/js";
 import globals from "globals";
-import pluginReact from "eslint-plugin-react";
-import { defineConfig } from "eslint/config";
-import jsdoc from "eslint-plugin-jsdoc";
+import reactHooks from "eslint-plugin-react-hooks";
+import reactRefresh from "eslint-plugin-react-refresh";
+import tseslint from "typescript-eslint";
+import { defineConfig, globalIgnores } from "eslint/config";
 
 export default defineConfig([
+  globalIgnores(["dist", "docs", "src/sw.ts"]),
   {
-    ignores: ["**/dist/**", "**/docs/**", "**/src/sw.js"],
-  },
-  jsdoc.configs["flat/recommended"],
-  {
-    files: ["**/*.js"],
-    plugins: {
-      jsdoc,
-    },
-    rules: {
-      "jsdoc/require-description": "warn",
-    },
-  },
-  {
-    files: ["**/*.{js,jsx}"],
-    plugins: {
-      jsdoc,
-    },
-    settings: {
-      jsdoc: {
-        preferredTypes: {
-          "React.ReactNode": "React.ReactNode",
-          "JSX.Element": "JSX.Element",
-        },
-        mode: "typescript",
-      },
-    },
-    rules: {
-      "jsdoc/no-undefined-types": [
-        "warn",
-        {
-          definedTypes: [
-            "React",
-            "React.ReactNode",
-            "JSX",
-            "JSX.Element",
-            "HTMLElement",
-            "Event",
-            "MouseEvent",
-            "KeyboardEvent",
-            "FormEvent",
-            "ChangeEvent",
-            "InputEvent",
-            "FocusEvent",
-            "ClipboardEvent",
-            "DragEvent",
-            "TouchEvent",
-            "WheelEvent",
-            "AnimationEvent",
-            "TransitionEvent",
-            "PointerEvent",
-            "CompositionEvent",
-            "UIEvent",
-            "SyntheticEvent",
-          ],
-        },
-      ],
-      "jsdoc/check-tag-names": [
-        "warn",
-        {
-          definedTags: ["component", "generated", "vitest-environment"],
-        },
-      ],
-    },
-  },
-  {
-    files: ["**/*.{js,mjs,cjs,jsx}"],
-    plugins: { js },
-    extends: ["js/recommended"],
-    languageOptions: { globals: globals.browser },
-  },
-  {
-    ...pluginReact.configs.flat.recommended,
-    settings: {
-      react: {
-        version: "19.0.0",
-      },
-    },
-  },
-  {
-    rules: {
-      "react/react-in-jsx-scope": "off",
+    files: ["**/*.{ts,tsx}"],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs["recommended-latest"],
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
     },
   },
 ]);

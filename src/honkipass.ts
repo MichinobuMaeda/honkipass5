@@ -1,18 +1,17 @@
 const maxTryCount = 1000;
 
-/**
- * @typedef {object} Param
- * @property {number} length - Password length.
- * @property {string} preset - Character set preset (s, e, m).
- * @property {boolean} lowerCase - Include lowercase letters.
- * @property {boolean} upperCase - Include uppercase letters.
- * @property {boolean} numerics - Include numeric characters.
- * @property {boolean} symbols - Include symbol characters.
- * @property {boolean} allTypes - Require all selected character types.
- * @property {boolean} uniqueChars - Require unique characters only.
- * @property {boolean} applyExcluded - Apply character exclusion.
- * @property {string} excludedChars - Characters to exclude.
- */
+interface Param {
+  length: number;
+  preset: string;
+  lowerCase: boolean;
+  upperCase: boolean;
+  numerics: boolean;
+  symbols: boolean;
+  allTypes: boolean;
+  uniqueChars: boolean;
+  applyExcluded: boolean;
+  excludedChars: string;
+}
 
 export const charSetAll =
   "!\"#$%&'()*+,-./0123456789:;<=>?@" +
@@ -33,13 +32,13 @@ export const defaultExcludedChars = "Il10O8B3Egqvu!|[]{}";
  * @param {Param} param - Parameters for character set generation.
  * @returns {string} Generated character set.
  */
-export const generateChars = (param) => {
-  let ret;
+export const generateChars = (param: Param): string => {
+  let ret: string;
   switch (param.preset) {
-    case "e":
+    case "ext":
       ret = charSetExt;
       break;
-    case "m":
+    case "manual":
       ret = charSetAll;
       if (!param.upperCase) {
         ret = ret.replace(/[A-Z]/g, "");
@@ -59,7 +58,7 @@ export const generateChars = (param) => {
         });
       }
       break;
-    default: // "s"
+    default: // "std"
       ret = charSetStd;
       break;
   }
@@ -72,7 +71,7 @@ export const generateChars = (param) => {
  * @param {string} chars - Available character set.
  * @returns {string} Generated candidate password.
  */
-const generateCandidate = (param, chars) => {
+const generateCandidate = (param: Param, chars: string): string => {
   const buff = new Uint32Array(param.length);
   crypto.getRandomValues(buff);
   return buff.reduce((p, c) => p + chars.charAt(c % chars.length), "");
@@ -84,7 +83,7 @@ const generateCandidate = (param, chars) => {
  * @param {string} password - Password to validate.
  * @returns {boolean} True if password meets criteria.
  */
-const validatePassword = (param, password) =>
+const validatePassword = (param: Param, password: string): boolean =>
   password.length === param.length &&
   (!param.allTypes ||
     ((!param.upperCase || /[A-Z]/.test(password)) &&
@@ -100,7 +99,7 @@ const validatePassword = (param, password) =>
  * @param {string} chars - Available character set.
  * @returns {string} Generated password or empty string if failed.
  */
-export const generatePassword = (param, chars) => {
+export const generatePassword = (param: Param, chars: string): string => {
   for (let i = 0; i < maxTryCount; ++i) {
     const password = generateCandidate(param, chars);
     if (validatePassword(param, password)) {

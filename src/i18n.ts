@@ -3,11 +3,10 @@ import { initReactI18next } from "react-i18next";
 
 export const resources = {
   en: {
-    label: "En",
     translation: {
       "offline ready": "You can install this app for offline use.",
       "update app": "A new app is available. Click to refresh.",
-      "app title": "Honkipass",
+      "app title": "Honkipass 5",
       password: "Password",
       generated: "Generated",
       "please wait": "Please wait...",
@@ -21,16 +20,18 @@ export const resources = {
       "unique chars": "Don't use the same characters",
       "apply excludes": "Excl",
       "excluded chars": "Excluded characters",
+      "light mode": "Light Mode",
+      "dark mode": "Dark Mode",
+      auto: "Auto",
     },
   },
   ja: {
-    label: "日",
     translation: {
       "offline ready":
         "このアプリはオフラインで使用するためにインストールできます。",
       "update app":
         "新しいアプリがあります。ボタンをクリックして更新してください。",
-      "app title": "本気でパスワード",
+      "app title": "本気でパスワード 5",
       password: "パスワード",
       generated: "生成しました",
       "please wait": "処理中です...",
@@ -44,6 +45,9 @@ export const resources = {
       "unique chars": "同じ文字を使用しない",
       "apply excludes": "除外",
       "excluded chars": "除外対象の文字",
+      "light mode": "ライトモード",
+      "dark mode": "ダークモード",
+      auto: "自動",
     },
   },
 };

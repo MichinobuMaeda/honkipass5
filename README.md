@@ -1,47 +1,73 @@
-# Honkipass 5
+# React + TypeScript + Vite
 
-Password generator
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-[Sample](https://pages.michinobu.jp/honkipass5)
+Currently, two official plugins are available:
 
-![Screen shot: light / dark](docs/honkipass5.png)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Note
+## React Compiler
 
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+
+## Expanding the ESLint configuration
+
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-$ npm create @vite-pwa/pwa@latest
 
-✔ Project name: … honkipass5
-✔ Select a framework: › React
-✔ Select a variant: › JavaScript
-✔ PWA Name: … honkipass5
-✔ PWA Short Name: … honkipass5
-✔ PWA Description: …
-✔ Theme color: … #46B482
-✔ Select a strategy: › injectManifest
-✔ Select a behavior: › Prompt for update
-✔ Enable periodic SW updates? … no / yes
-✔ Show offline ready prompt? … no / yes
-✔ Generate PWA Assets Icons on the fly? … no / yes
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-$ cd honkipass5
-$ npm i
-$ npm i tailwindcss @tailwindcss/vite
-$ npm init @eslint/config@latest
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-✔ What do you want to lint? · javascript
-✔ How would you like to use ESLint? · problems
-✔ What type of modules does your project use? · esm
-✔ Which framework does your project use? · react
-✔ Does your project use TypeScript? · No / Yes
-✔ Where does your code run? · browser
-✔ Would you like to install them now? · No / Yes
-✔ Which package manager do you want to use? · npm
-
-$ $ npm i prop-types
-$ npm i -D --save-exact prettier
-$ node --eval "fs.writeFileSync('.prettierrc','{}\n')"
-$ node --eval "fs.writeFileSync('.prettierignore','# Ignore artifacts:\nbuild\ncoverage\n')"
-
-$ npm i react-i18next i18next
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```

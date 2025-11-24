@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "bradlc.vscode-tailwindcss",
     "dbaeumer.vscode-eslint",
     "eamodio.gitlens",
     "editorconfig.editorconfig",
