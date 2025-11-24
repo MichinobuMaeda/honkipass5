@@ -81,7 +81,7 @@ main {
       var(--footer-height)
   );
   margin: 0;
-  padding: 0.25rem 0.5rem 1rem 0.5rem;
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
   background-color: light-dark(var(--color-light-form), var(--color-dark-form));
 }
 
@@ -144,7 +144,7 @@ footer {
   align-items: center;
   height: var(--footer-height);
   margin: 0;
-  padding: 0 0.5rem;
+  padding: 0 0.5rem env(safe-area-inset-bottom, 0) 0.5rem;
   gap: 1rem;
   width: 100vw;
   color: light-dark(
