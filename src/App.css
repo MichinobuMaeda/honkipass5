@@ -78,7 +78,8 @@ main {
   width: 100vw;
   min-height: calc(
     100vh - var(--header-height) - var(--result-area-height) -
-      var(--footer-min-height) - env(safe-area-inset-bottom, 0)
+      var(--footer-min-height) - env(safe-area-inset-top, 0) -
+      env(safe-area-inset-bottom, 0)
   );
   margin: 0;
   padding: 0.25rem 0.5rem 0.5rem 0.5rem;
