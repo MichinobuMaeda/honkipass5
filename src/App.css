@@ -6,10 +6,6 @@
   --monospace-font-family: "Lucida Console", Courier, monospace;
 }
 
-html {
-  height: -webkit-fill-available;
-}
-
 body {
   background-color: light-dark(
     var(--color-light-background),
@@ -17,9 +13,6 @@ body {
   );
   padding: 0;
   margin: 0;
-
-  min-height: 100vh;
-  min-height: -webkit-fill-available;
 }
 
 header {
@@ -83,23 +76,10 @@ main {
   display: flex;
   flex-direction: column;
   width: 100vw;
-  min-height: calc(
-    100vh - var(--footer-min-height) - env(safe-area-inset-bottom, 0)
-  );
   margin: 0;
   padding: calc(0.25rem + var(--header-height) + var(--result-area-height))
-    0.5rem 0.5rem 0.5rem;
+    0.5rem 1rem 0.5rem;
   background-color: light-dark(var(--color-light-form), var(--color-dark-form));
-}
-
-/* Prefer -webkit-fill-available on WebKit browsers to avoid 100vh mobile issues */
-@supports (-webkit-touch-callout: none) {
-  main {
-    min-height: calc(
-      -webkit-fill-available - var(--footer-min-height) -
-        env(safe-area-inset-bottom, 0)
-    );
-  }
 }
 
 div:has(> #char-map) {
@@ -176,10 +156,7 @@ footer {
     var(--color-light-on-surface-variant),
     var(--color-dark-on-surface-variant)
   );
-  background-color: light-dark(
-    var(--color-light-surface-container),
-    var(--color-dark-surface-container)
-  );
+  background-color: transparent;
   font-size: 0.875rem;
   line-height: 1.75rem;
 }
