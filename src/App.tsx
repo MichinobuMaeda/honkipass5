@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, use } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Menu, TextField, Slider, Switch } from "glassine-paper";
 import PWABadge from "./PWABadge";
