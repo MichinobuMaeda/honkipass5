@@ -23,7 +23,7 @@ body {
 }
 
 header {
-  position: sticky;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -69,7 +69,7 @@ header h1 {
 }
 
 #result-area {
-  position: sticky;
+  position: fixed;
   top: 3rem;
   left: 0;
   width: 100vw;
@@ -84,13 +84,22 @@ main {
   flex-direction: column;
   width: 100vw;
   min-height: calc(
-    100vh - var(--header-height) - var(--result-area-height) -
-      var(--footer-min-height) - env(safe-area-inset-top, 0) -
-      env(safe-area-inset-bottom, 0)
+    100vh - var(--footer-min-height) - env(safe-area-inset-bottom, 0)
   );
   margin: 0;
-  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+  padding: calc(0.25rem + var(--header-height) + var(--result-area-height))
+    0.5rem 0.5rem 0.5rem;
   background-color: light-dark(var(--color-light-form), var(--color-dark-form));
+}
+
+/* Prefer -webkit-fill-available on WebKit browsers to avoid 100vh mobile issues */
+@supports (-webkit-touch-callout: none) {
+  main {
+    min-height: calc(
+      -webkit-fill-available - var(--footer-min-height) -
+        env(safe-area-inset-bottom, 0)
+    );
+  }
 }
 
 div:has(> #char-map) {
