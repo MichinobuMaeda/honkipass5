@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, use } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Menu, TextField, Slider, Switch } from "glassine-paper";
 import PWABadge from "./PWABadge";
@@ -31,31 +31,47 @@ const rowStyle: React.CSSProperties = {
 function App() {
   const { t, i18n } = useTranslation();
 
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [lang, setLang] = useState("ja");
-  const [brightness, setBrightness] = useState<"light" | "dark" | "light dark">(
-    "light dark",
+  const saved = JSON.parse(
+    window.localStorage.getItem("honkipass5-params") || "{}",
   );
+
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [lang, setLang] = useState(saved.lang ?? "ja");
+  const [brightness, setBrightness] = useState<"light" | "dark" | "light dark">(
+    saved.brightness ?? "light dark",
+  );
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("color-scheme", brightness);
+  }, [brightness]);
 
   const [password, setPassword] = useState("abcdefghijklmnopqrstuvwxyz");
   const [message, setMessage] = useState("generated");
   const [error, setError] = useState(false);
 
   const lengthList = [6, 8, 10, 12, 16, 20, 24, 30, 36, 48, 64, 128];
-  const [lengthIndex, setLengthIndex] = useState(1);
+  const [lengthIndex, setLengthIndex] = useState(
+    saved.length ? lengthList.indexOf(saved.length) : 1,
+  );
   const length = useMemo(
     () => lengthList[lengthIndex],
     [lengthIndex, lengthList],
   );
-  const [preset, setPreset] = useState<"std" | "ext" | "manual">("std");
-  const [lowerCase, setLowerCase] = useState(true);
-  const [upperCase, setUpperCase] = useState(true);
-  const [numerics, setNumerics] = useState(true);
-  const [symbols, setSymbols] = useState(true);
-  const [allTypes, setAllTypes] = useState(true);
-  const [uniqueChars, setUniqueChars] = useState(true);
-  const [applyExcluded, setApplyExcluded] = useState(true);
-  const [excludedChars, setExcludedChars] = useState(defaultExcludedChars);
+  const [preset, setPreset] = useState<"std" | "ext" | "manual">(
+    saved.preset ?? "std",
+  );
+  const [lowerCase, setLowerCase] = useState(saved.lowerCase ?? true);
+  const [upperCase, setUpperCase] = useState(saved.upperCase ?? true);
+  const [numerics, setNumerics] = useState(saved.numerics ?? true);
+  const [symbols, setSymbols] = useState(saved.symbols ?? true);
+  const [allTypes, setAllTypes] = useState(saved.allTypes ?? true);
+  const [uniqueChars, setUniqueChars] = useState(saved.uniqueChars ?? true);
+  const [applyExcluded, setApplyExcluded] = useState(
+    saved.applyExcluded ?? true,
+  );
+  const [excludedChars, setExcludedChars] = useState(
+    saved.excludedChars ?? defaultExcludedChars,
+  );
 
   const params = useMemo(
     () => ({
@@ -143,8 +159,11 @@ function App() {
   };
 
   useEffect(() => {
-    document.documentElement.style.setProperty("color-scheme", brightness);
-  }, [brightness]);
+    window.localStorage.setItem(
+      "honkipass5-params",
+      JSON.stringify({ ...params, lang, brightness }),
+    );
+  }, [params, lang, brightness]);
 
   return (
     <>
@@ -298,6 +317,7 @@ function App() {
           <div id="char-map">
             {charSetAll.split("").map((c) => (
               <span
+                key={c}
                 className={`${!chars.includes(c) ? "disabled" : ""} ${password.includes(c) ? "used" : ""}`}
               >
                 {c}
@@ -422,7 +442,7 @@ function App() {
       <footer>
         <span>&copy; 2024, 2025 Michinobu Maeda</span>
         <a href="https://github.com/MichinobuMaeda/glassine-paper">GitHub</a>
-        <span>v{version}</span>
+        <span onClick={() => window.location.reload()}>v{version}</span>
       </footer>
       <PWABadge />
     </>
