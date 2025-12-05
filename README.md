@@ -1,6 +1,8 @@
 # Honkipass 5
 
-Password generator
+Password generator (React)
+
+Flutter WASM: <https://github.com/MichinobuMaeda/honkipass6/>
 
 [Sample](https://pages.michinobu.jp/honkipass5)
 
