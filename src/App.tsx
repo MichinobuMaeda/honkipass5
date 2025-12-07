@@ -50,8 +50,11 @@ function App() {
   const [error, setError] = useState(false);
 
   const lengthList = [6, 8, 10, 12, 16, 20, 24, 30, 36, 48, 64, 128];
+  const defaultLength = 10;
   const [lengthIndex, setLengthIndex] = useState(
-    saved.length ? lengthList.indexOf(saved.length) : 1,
+    saved.length
+      ? lengthList.indexOf(saved.length)
+      : lengthList.indexOf(defaultLength),
   );
   const length = useMemo(
     () => lengthList[lengthIndex],
@@ -103,7 +106,7 @@ function App() {
   const chars = useMemo(() => generateChars(params), [params]);
   const changed = useMemo(
     () =>
-      params.length !== 8 ||
+      params.length !== defaultLength ||
       params.preset !== "std" ||
       !params.lowerCase ||
       !params.upperCase ||
@@ -146,7 +149,7 @@ function App() {
   };
 
   const reset = () => {
-    setLengthIndex(1);
+    setLengthIndex(lengthList.indexOf(defaultLength));
     setPreset("std");
     setLowerCase(true);
     setUpperCase(true);
@@ -339,6 +342,16 @@ function App() {
             icon={<SvgResetSettings />}
             onClick={() => reset()}
             disabled={!changed}
+            className="hidden-sm"
+          />
+          <Button
+            variant="tonal"
+            size="sm"
+            label={t("reset")}
+            icon={<SvgResetSettings />}
+            onClick={() => reset()}
+            disabled={!changed}
+            className="hidden-xs"
           />
           <Slider
             min={0}
