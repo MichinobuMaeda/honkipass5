@@ -8,8 +8,8 @@
 
 body {
   background-color: light-dark(
-    var(--color-light-background),
-    var(--color-dark-background)
+    var(--color-light-surface-container),
+    var(--color-dark-surface-container)
   );
   padding: 0;
   margin: 0;
@@ -166,13 +166,13 @@ footer > a:not([class]) {
 
 @media (width < 480px) {
   .hidden-xs {
-    display: none;
+    display: none !important;
   }
 }
 
 @media (min-width: 480px) {
   .hidden-sm {
-    display: none;
+    display: none !important;
   }
 }
 @media (min-width: 480px) {

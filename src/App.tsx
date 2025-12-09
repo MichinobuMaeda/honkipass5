@@ -1,6 +1,13 @@
 import { useState, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { Button, Menu, TextField, Slider, Switch } from "glassine-paper";
+import {
+  AppBar,
+  Button,
+  Menu,
+  TextField,
+  Slider,
+  Switch,
+} from "glassine-paper";
 import PWABadge from "./PWABadge";
 import SvgLightMode from "./icons/SvgLightMode";
 import SvgDarkMode from "./icons/SvgDarkMode";
@@ -170,72 +177,68 @@ function App() {
 
   return (
     <>
-      <header>
-        <img src="./favicon.svg" alt={t("app title")} />
-        <h1>{t("app title")}</h1>
-        <div className="hidden-xs">
-          <Button
-            name="language"
-            type="select"
-            size="xs"
-            radius="square"
-            icon={<span>En</span>}
-            checked={lang === "en"}
-            onClick={() => {
+      <AppBar
+        items={[
+          {
+            type: "appLogo",
+            icon: <img src="./favicon.svg" alt={t("app title")} />,
+          },
+          {
+            type: "title",
+            title: t("app title"),
+          },
+          {
+            type: "spacer",
+          },
+          {
+            type: "button",
+            icon: <SvgMoreVert />,
+            onClick: () => setMenuOpen(!menuOpen),
+            className: "hidden-sm",
+          },
+          {
+            type: "button",
+            icon: <span>En</span>,
+            active: lang === "en",
+            onClick: () => {
               setLang("en");
               i18n.changeLanguage("en");
-            }}
-          />
-          <Button
-            name="language"
-            type="select"
-            size="xs"
-            radius="square"
-            icon={<span>日</span>}
-            checked={lang === "ja"}
-            onClick={() => {
+            },
+            className: "hidden-xs",
+          },
+          {
+            type: "button",
+            icon: <span>日</span>,
+            active: lang === "ja",
+            onClick: () => {
               setLang("ja");
               i18n.changeLanguage("ja");
-            }}
-          />
-          <Button
-            name="brightness-mode"
-            type="select"
-            size="xs"
-            radius="square"
-            icon={<SvgLightMode />}
-            checked={brightness === "light"}
-            onClick={() => setBrightness("light")}
-          />
-          <Button
-            name="brightness-mode"
-            type="select"
-            size="xs"
-            radius="square"
-            icon={<SvgDarkMode />}
-            checked={brightness === "dark"}
-            onClick={() => setBrightness("dark")}
-          />
-          <Button
-            name="brightness-mode"
-            type="select"
-            size="xs"
-            radius="square"
-            icon={<SvgBrightnessAuto />}
-            checked={brightness === "light dark"}
-            onClick={() => setBrightness("light dark")}
-          />
-        </div>
-        <div className="hidden-sm">
-          <Button
-            size="xs"
-            radius="square"
-            variant="tonal"
-            icon={<SvgMoreVert />}
-            onClick={() => setMenuOpen(!menuOpen)}
-          />
-        </div>
-      </header>
+            },
+            className: "hidden-xs",
+          },
+          {
+            type: "button",
+            icon: <SvgLightMode />,
+            active: brightness === "light",
+            onClick: () => setBrightness("light"),
+            className: "hidden-xs",
+          },
+          {
+            type: "button",
+            icon: <SvgDarkMode />,
+            active: brightness === "dark",
+            onClick: () => setBrightness("dark"),
+            className: "hidden-xs",
+          },
+          {
+            type: "button",
+            icon: <SvgBrightnessAuto />,
+            active: brightness === "light dark",
+            onClick: () => setBrightness("light dark"),
+            className: "hidden-xs",
+          },
+        ]}
+      />
       {menuOpen && (
         <Menu
           id="main-menu"
